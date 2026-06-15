@@ -8,6 +8,7 @@ import { useCartStore } from "@/lib/stores/cart.store";
 import type { Product } from "@/lib/types";
 import { toast } from "sonner";
 import Image from "next/image";
+import FavoriteButton from "@/components/store/FavoriteButton";
 
 interface ProductCardProps {
   product: Product;
@@ -41,11 +42,11 @@ export default function ProductCard({ product }: ProductCardProps) {
   const attr = product.plant_attributes;
 
   return (
-    <div className="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden flex flex-col">
+    <div className="group bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden flex flex-col">
       {/* Imagen */}
       <Link
         href={`/producto/${product.slug}`}
-        className="relative block aspect-square bg-linear-to-br from-green-50 to-emerald-200 overflow-hidden"
+        className="relative block aspect-square bg-linear-to-br from-green-50 dark:from-green-950 to-emerald-200 overflow-hidden"
       >
         {product.images && product.images.length > 0 ? (
           <Image
@@ -80,6 +81,9 @@ export default function ProductCard({ product }: ProductCardProps) {
             </Badge>
           )}
         </div>
+        <div className="absolute top-3 right-3">
+          <FavoriteButton productId={product.id} size="sm" />
+        </div>
       </Link>
 
       {/* Info */}
@@ -89,7 +93,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             {product.category?.name}
           </p>
           <Link href={`/producto/${product.slug}`}>
-            <h3 className="font-semibold text-gray-900 hover:text-green-700 transition-colors leading-snug">
+            <h3 className="font-semibold text-gray-900 dark:text-white hover:text-green-700 dark:hover:text-green-400 transition-colors leading-snug">
               {product.name}
             </h3>
           </Link>
@@ -112,9 +116,9 @@ export default function ProductCard({ product }: ProductCardProps) {
         )}
 
         {/* Precio y acción */}
-        <div className="flex items-center justify-between mt-auto pt-2 border-t border-gray-50">
+        <div className="flex items-center justify-between mt-auto pt-2 border-t border-gray-300 dark:border-gray-700">
           <div>
-            <span className="text-lg font-bold text-gray-900">
+            <span className="text-lg font-bold text-gray-900 dark:text-white">
               ${Number(product.base_price).toFixed(2)}
             </span>
             {product.compare_price && (
@@ -129,7 +133,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             disabled={isOutOfStock}
             className="bg-green-600 hover:bg-green-700 text-white"
           >
-            <ShoppingCart className="w-4 h-4" />
+            <ShoppingCart className="size-4" />
           </Button>
         </div>
       </div>

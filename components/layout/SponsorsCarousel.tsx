@@ -14,7 +14,7 @@ export default function SponsorsCarousel() {
 
     let animationFrame: number;
     let lastTimestamp = performance.now();
-    const speed = 60; 
+    const speed = 60;
 
     const animate = (now: number) => {
       if (!isPaused) {
@@ -36,15 +36,15 @@ export default function SponsorsCarousel() {
 
     animationFrame = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(animationFrame);
-  }, [isPaused]); 
+  }, [isPaused]);
 
   if (!sponsors || sponsors.length === 0) return null;
 
   return (
-    <div className="w-full bg-green-950 py-6 overflow-hidden border-y border-green-900">
+    <div className="w-full bg-green-950 dark:bg-gray-950 py-6 overflow-hidden border-y border-green-900 dark:border-gray-800">
       <div className="max-w-7xl mx-auto px-4 mb-6">
-        <h3 className="text-center text-sm font-semibold text-gray-300 uppercase tracking-wider">
-          Empresas que confían en nosotros
+        <h3 className="text-center text-sm font-semibold text-gray-300 dark:text-gray-200 uppercase tracking-wider">
+          Nuestra marca y productos
         </h3>
       </div>
 

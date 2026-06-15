@@ -136,3 +136,30 @@ export interface Order {
   updated_at: string;
   order_items?: OrderItem[];
 }
+
+export interface Favorite {
+  id: string;
+  user_id: string;
+  product_id: string;
+  created_at: string;
+}
+
+export interface Review {
+  id: string;
+  product_id: string;
+  user_id: string;
+  order_id: string | null;
+  rating: number;
+  title: string | null;
+  body: string | null;
+  is_approved: boolean;
+  created_at: string;
+  profiles?: {
+    full_name: string | null;
+  };
+}
+
+export interface ProductRating {
+  average_rating: number;
+  total_reviews: number;
+}

@@ -32,7 +32,7 @@ export default function AdminLink() {
   return (
     <Link
       href="/admin/dashboard"
-      className="flex items-center gap-1.5 text-sm font-medium text-green-700 hover:text-green-900 bg-green-50 hover:bg-green-100 px-3 py-1.5 rounded-lg transition-colors"
+      className="flex items-center gap-1.5 text-sm font-medium text-green-700 dark:text-green-300 hover:text-green-900 dark:hover:text-green-100 bg-green-50 dark:bg-green-900/40 hover:bg-green-100 dark:hover:bg-green-900/70 px-3 py-1.5 rounded-lg transition-colors"
     >
       <LayoutDashboard className="w-4 h-4" />
       Admin

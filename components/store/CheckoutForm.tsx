@@ -75,9 +75,9 @@ export default function CheckoutForm() {
         {/* Columna izquierda — Formulario */}
         <div className="lg:col-span-2 flex flex-col gap-6">
           {/* Datos personales */}
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-            <h2 className="font-semibold text-gray-900 mb-5 flex items-center gap-2">
-              <span className="w-6 h-6 bg-green-600 text-white rounded-full text-xs flex items-center justify-center font-bold">
+          <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-600 shadow-sm p-6">
+            <h2 className="font-semibold text-gray-900 dark:text-white mb-5 flex items-center gap-2">
+              <span className="size-6 bg-green-600 text-white rounded-full text-xs flex items-center justify-center font-bold">
                 1
               </span>
               Datos personales
@@ -130,9 +130,9 @@ export default function CheckoutForm() {
           </div>
 
           {/* Dirección de envío */}
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-            <h2 className="font-semibold text-gray-900 mb-5 flex items-center gap-2">
-              <span className="w-6 h-6 bg-green-600 text-white rounded-full text-xs flex items-center justify-center font-bold">
+          <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-600 shadow-sm p-6">
+            <h2 className="font-semibold text-gray-900 dark:text-white mb-5 flex items-center gap-2">
+              <span className="size-6 bg-green-600 text-white rounded-full text-xs flex items-center justify-center font-bold">
                 2
               </span>
               Dirección de envío
@@ -199,9 +199,9 @@ export default function CheckoutForm() {
           </div>
 
           {/* Método de pago */}
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-            <h2 className="font-semibold text-gray-900 mb-5 flex items-center gap-2">
-              <span className="w-6 h-6 bg-green-600 text-white rounded-full text-xs flex items-center justify-center font-bold">
+          <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-600 shadow-sm p-6">
+            <h2 className="font-semibold text-gray-900 dark:text-white mb-5 flex items-center gap-2">
+              <span className="size-6 bg-green-600 text-white rounded-full text-xs flex items-center justify-center font-bold">
                 3
               </span>
               Método de pago
@@ -212,8 +212,8 @@ export default function CheckoutForm() {
                   key={value}
                   className={`cursor-pointer border-2 rounded-xl p-4 flex flex-col gap-1 transition-colors ${
                     paymentMethod === value
-                      ? "border-green-600 bg-green-50"
-                      : "border-gray-200 hover:border-green-300"
+                      ? "border-green-600 bg-green-50 dark:bg-gray-800"
+                      : "border-gray-200 hover:border-green-300 dark:border-gray-700 dark:hover:border-green-500"
                   }`}
                 >
                   <input
@@ -225,17 +225,19 @@ export default function CheckoutForm() {
                   <Icon
                     className={`w-5 h-5 ${paymentMethod === value ? "text-green-600" : "text-gray-400"}`}
                   />
-                  <span className="font-medium text-sm text-gray-900">
+                  <span className="font-medium text-sm text-gray-900 dark:text-white">
                     {label}
                   </span>
-                  <span className="text-xs text-gray-500">{desc}</span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400">
+                    {desc}
+                  </span>
                 </label>
               ))}
             </div>
 
             {/* Instrucciones según método */}
             {paymentMethod === "zelle" && (
-              <div className="bg-blue-50 rounded-xl p-4 text-sm text-blue-800">
+              <div className="bg-blue-50 dark:bg-gray-800 rounded-xl p-4 text-sm text-blue-800 dark:text-blue-200 border border-gray-300 dark:border-gray-600">
                 <p className="font-medium mb-1">Datos para Zelle</p>
                 <p>📧 pagos@yomisgarden.com</p>
                 <p className="text-xs mt-2 text-blue-600">
@@ -244,14 +246,14 @@ export default function CheckoutForm() {
               </div>
             )}
             {paymentMethod === "pago_movil" && (
-              <div className="bg-orange-50 rounded-xl p-4 text-sm text-orange-800">
+              <div className="bg-orange-50 dark:bg-gray-800  rounded-xl p-4 text-sm text-orange-800 dark:text-orange-200 border border-gray-300 dark:border-gray-600">
                 <p className="font-medium mb-1">Datos para Pago Móvil</p>
                 <p>🏦 Banco: Banesco • V-10300337</p>
                 <p>📱 Teléfono: 0414-7682761</p>
               </div>
             )}
             {paymentMethod === "stripe" && (
-              <div className="bg-purple-50 rounded-xl p-4 text-sm text-purple-800">
+              <div className="bg-purple-50 dark:bg-gray-800 rounded-xl p-4 text-sm text-purple-800 dark:text-purple-300 border border-gray-300 dark:border-gray-600">
                 <p className="font-medium mb-1">Pago con tarjeta</p>
                 <p>
                   Serás redirigido a la pasarela segura de Stripe para completar
@@ -277,9 +279,9 @@ export default function CheckoutForm() {
           </div>
 
           {/* Notas */}
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-            <h2 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
-              <span className="w-6 h-6 bg-green-600 text-white rounded-full text-xs flex items-center justify-center font-bold">
+          <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-600 shadow-sm p-6">
+            <h2 className="font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+              <span className="size-6 bg-green-600 text-white rounded-full text-xs flex items-center justify-center font-bold">
                 4
               </span>
               Notas del pedido (opcional)
@@ -295,8 +297,8 @@ export default function CheckoutForm() {
 
         {/* Columna derecha — Resumen */}
         <div className="lg:col-span-1">
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sticky top-24">
-            <h2 className="font-bold text-gray-900 text-lg mb-5 flex items-center gap-2">
+          <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-600 shadow-sm p-6 sticky top-24">
+            <h2 className="font-bold text-gray-900 dark:text-white text-lg mb-5 flex items-center gap-2">
               <ShoppingCart className="w-5 h-5 text-green-600" />
               Tu pedido
             </h2>
@@ -310,7 +312,7 @@ export default function CheckoutForm() {
                 return (
                   <div
                     key={`${item.product.id}-${item.variant?.id}`}
-                    className="flex items-center gap-3"
+                    className="flex items-center gap-3 border border-gray-200 dark:border-gray-700 rounded-lg p-3"
                   >
                     <div className="relative size-12 bg-green-50 rounded-lg flex items-center justify-center shrink-0 overflow-hidden">
                       {item.product.images?.[0] ? (
@@ -326,17 +328,19 @@ export default function CheckoutForm() {
                       )}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-gray-900 truncate">
+                      <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
                         {item.product.name}
                       </p>
                       {item.variant && (
-                        <p className="text-xs text-gray-500">
+                        <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
                           {item.variant.name}
                         </p>
                       )}
-                      <p className="text-xs text-gray-500">x{item.quantity}</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">
+                        x{item.quantity}
+                      </p>
                     </div>
-                    <span className="text-sm font-semibold text-gray-900 shrink-0">
+                    <span className="text-sm font-semibold text-gray-900 dark:text-white shrink-0">
                       ${(price * item.quantity).toFixed(2)}
                     </span>
                   </div>
@@ -345,16 +349,16 @@ export default function CheckoutForm() {
             </div>
 
             {/* Totales */}
-            <div className="border-t border-gray-100 pt-4 flex flex-col gap-2 text-sm mb-5">
-              <div className="flex justify-between text-gray-600">
+            <div className="border-t border-gray-300 dark:border-gray-600 pt-4 flex flex-col gap-2 text-sm mb-5">
+              <div className="flex justify-between text-gray-600 dark:text-gray-400">
                 <span>Subtotal</span>
                 <span>${totalPrice().toFixed(2)}</span>
               </div>
-              <div className="flex justify-between text-gray-600">
+              <div className="flex justify-between text-gray-600 dark:text-gray-400">
                 <span>Envío</span>
                 <span className="text-green-600">A coordinar</span>
               </div>
-              <div className="flex justify-between font-bold text-gray-900 text-base pt-2 border-t border-gray-100">
+              <div className="flex justify-between font-bold text-gray-900 dark:text-white text-base pt-2 border-t border-gray-300 dark:border-gray-600">
                 <span>Total</span>
                 <span>${totalPrice().toFixed(2)}</span>
               </div>

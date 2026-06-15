@@ -29,21 +29,25 @@ export default async function MisPedidosPage() {
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10 rounded-2xl">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Mis pedidos</h1>
-        <p className="text-gray-500 mt-1">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+          Mis pedidos
+        </h1>
+        <p className="text-gray-500 dark:text-gray-400 mt-1">
           {orders?.length ?? 0} pedidos realizados
         </p>
       </div>
 
       {orders?.length === 0 ? (
-        <div className="text-center py-20">
-          <div className="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Package className="w-10 h-10 text-green-300" />
+        <div className="text-center py-20 rounded-2xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-sm">
+          <div className="w-20 h-20 bg-green-50 dark:bg-green-950/40 rounded-full flex items-center justify-center mx-auto mb-4">
+            <Package className="w-10 h-10 text-green-300 dark:text-green-400" />
           </div>
-          <p className="text-gray-500 mb-4">Aún no tienes pedidos</p>
+          <p className="text-gray-500 dark:text-gray-300 mb-4">
+            Aún no tienes pedidos
+          </p>
           <Link
             href="/catalogo"
-            className="text-green-600 hover:text-green-700 font-medium"
+            className="text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 font-medium"
           >
             Explorar catálogo →
           </Link>
@@ -55,14 +59,14 @@ export default async function MisPedidosPage() {
             return (
               <div
                 key={order.id}
-                className="bg-white rounded-2xl border border-gray-300 shadow-sm p-6"
+                className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-sm p-6"
               >
                 <div className="flex items-center justify-between mb-4">
                   <div>
-                    <p className="font-mono font-semibold text-green-700">
+                    <p className="font-mono font-semibold text-green-700 dark:text-green-400">
                       {order.order_number}
                     </p>
-                    <p className="text-xs text-gray-400 mt-0.5">
+                    <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">
                       {new Date(order.created_at).toLocaleDateString("es-VE", {
                         day: "2-digit",
                         month: "long",
@@ -76,14 +80,14 @@ export default async function MisPedidosPage() {
                     >
                       {status?.label}
                     </span>
-                    <span className="font-bold text-gray-900">
+                    <span className="font-bold text-gray-900 dark:text-white">
                       ${Number(order.total).toFixed(2)}
                     </span>
                   </div>
                 </div>
 
                 {/* Items */}
-                <div className="flex flex-col gap-2 border-t border-gray-50 pt-4">
+                <div className="flex flex-col gap-2 border-t border-gray-300 dark:border-gray-800 pt-4">
                   {order.order_items?.map(
                     (item: {
                       id: string;
@@ -95,10 +99,10 @@ export default async function MisPedidosPage() {
                         key={item.id}
                         className="flex justify-between text-sm"
                       >
-                        <span className="text-gray-600">
+                        <span className="text-gray-600 dark:text-gray-300">
                           {item.product_name} × {item.quantity}
                         </span>
-                        <span className="font-medium text-gray-900">
+                        <span className="font-medium text-gray-900 dark:text-white">
                           ${Number(item.total_price).toFixed(2)}
                         </span>
                       </div>
@@ -107,7 +111,7 @@ export default async function MisPedidosPage() {
                 </div>
 
                 {/* Método de pago */}
-                <div className="mt-3 pt-3 border-t border-gray-50 flex items-center justify-between text-xs text-gray-400">
+                <div className="mt-3 pt-3 border-t border-gray-300 dark:border-gray-800 flex items-center justify-between text-xs text-gray-400 dark:text-gray-500">
                   <span>
                     {order.payment_method === "zelle" && "💸 Zelle"}
                     {order.payment_method === "pago_movil" && "📱 Pago Móvil"}
@@ -117,8 +121,8 @@ export default async function MisPedidosPage() {
                   <span
                     className={
                       order.payment_status === "paid"
-                        ? "text-green-600 font-medium"
-                        : "text-yellow-600 font-medium"
+                        ? "text-green-600 dark:text-green-400 font-medium"
+                        : "text-yellow-600 dark:text-yellow-400 font-medium"
                     }
                   >
                     {order.payment_status === "paid"

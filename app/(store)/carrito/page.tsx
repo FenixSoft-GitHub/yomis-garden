@@ -27,10 +27,10 @@ export default function CarritoPage() {
   if (items.length === 0) {
     return (
       <div className="max-w-2xl mx-auto px-4 py-24 text-center">
-        <div className="w-24 h-24 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6">
-          <ShoppingCart className="w-10 h-10 text-green-300" />
+        <div className="w-24 h-24 bg-green-50 dark:bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-6 border border-gray-100 dark:border-gray-700 shadow-sm">
+          <ShoppingCart className="size-10 text-green-300 dark:text-green-400" />
         </div>
-        <h1 className="text-2xl font-bold text-gray-900 mb-3">
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
           Tu carrito está vacío
         </h1>
         <p className="text-gray-500 mb-8">
@@ -38,7 +38,7 @@ export default function CarritoPage() {
         </p>
         <Link href="/catalogo">
           <Button className="bg-green-600 hover:bg-green-700 text-white gap-2">
-            <Leaf className="w-4 h-4" />
+            <Leaf className="size-4" />
             Ver catálogo
           </Button>
         </Link>
@@ -50,8 +50,10 @@ export default function CarritoPage() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Tu carrito</h1>
-          <p className="text-gray-500 mt-1">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+            Tu carrito
+          </h1>
+          <p className="text-gray-500 dark:text-gray-400 mt-1">
             {totalItems()} producto{totalItems() !== 1 ? "s" : ""}
           </p>
         </div>
@@ -64,7 +66,7 @@ export default function CarritoPage() {
           }}
           className="text-gray-400 hover:text-red-500 text-sm"
         >
-          <Trash2 className="w-4 h-4 mr-1" /> Vaciar
+          <Trash2 className="size-4 mr-1" /> Vaciar
         </Button>
       </div>
 
@@ -81,7 +83,7 @@ export default function CarritoPage() {
             return (
               <div
                 key={key}
-                className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex gap-5"
+                className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-5 flex gap-5"
               >
                 {/* Imagen */}
                 <Link href={`/producto/${item.product.slug}`}>
@@ -105,12 +107,12 @@ export default function CarritoPage() {
                   <div className="flex items-start justify-between gap-2">
                     <div>
                       <Link href={`/producto/${item.product.slug}`}>
-                        <h3 className="font-semibold text-gray-900 hover:text-green-700 transition-colors">
+                        <h3 className="font-semibold text-gray-900 dark:text-white hover:text-green-700 transition-colors">
                           {item.product.name}
                         </h3>
                       </Link>
                       {item.variant && (
-                        <p className="text-sm text-gray-500">
+                        <p className="text-sm text-gray-500 dark:text-gray-400">
                           {item.variant.name}
                         </p>
                       )}
@@ -125,7 +127,7 @@ export default function CarritoPage() {
                       }}
                       className="text-gray-300 hover:text-red-500 transition-colors p-1"
                     >
-                      <Trash2 className="w-4 h-4" />
+                      <Trash2 className="size-4" />
                     </button>
                   </div>
 
@@ -172,36 +174,37 @@ export default function CarritoPage() {
 
         {/* Resumen del pedido */}
         <div className="lg:col-span-1">
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sticky top-24">
-            <h2 className="font-bold text-gray-900 text-lg mb-5">
+          <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-6 sticky top-24">
+            <h2 className="font-bold text-gray-900 dark:text-white text-lg mb-5">
               Resumen del pedido
             </h2>
 
             <div className="flex flex-col gap-3 text-sm mb-5">
-              <div className="flex justify-between text-gray-600">
+              <div className="flex justify-between text-gray-600 dark:text-gray-400">
                 <span>Subtotal ({totalItems()} productos)</span>
                 <span>${totalPrice().toFixed(2)}</span>
               </div>
-              <div className="flex justify-between text-gray-600">
+              <div className="flex justify-between text-gray-600 dark:text-gray-400">
                 <span>Envío</span>
                 <span className="text-green-600">A calcular</span>
               </div>
-              <div className="border-t border-gray-100 pt-3 flex justify-between font-bold text-gray-900 text-base">
+              <div className="border-t border-gray-300 dark:border-gray-800 pt-3 flex justify-between font-bold text-gray-900 dark:text-white text-base">
                 <span>Total estimado</span>
                 <span>${totalPrice().toFixed(2)}</span>
               </div>
             </div>
 
             {/* Métodos de pago disponibles */}
-            <div className="bg-gray-50 rounded-xl p-3 mb-5 text-xs text-gray-500">
-              <p className="font-medium text-gray-700 mb-2">
+            <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-3 mb-5 text-xs text-gray-500 dark:text-gray-400">
+              <p className="font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Métodos de pago aceptados
               </p>
+
               <div className="flex flex-wrap gap-2">
                 {["💳 Stripe", "💸 Zelle", "📱 Pago Móvil"].map((m) => (
                   <span
                     key={m}
-                    className="bg-white border border-gray-200 px-2 py-1 rounded-lg"
+                    className="bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 px-2 py-1 rounded-lg"
                   >
                     {m}
                   </span>

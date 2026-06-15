@@ -20,6 +20,8 @@ import {
   Sun,
   PawPrint,
 } from "lucide-react";
+import FavoriteButton from "./FavoriteButton";
+import ReviewList from "./ReviewList";
 
 const luzLabel: Record<string, string> = {
   sol_directo: "☀️ Sol directo",
@@ -72,12 +74,12 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       {/* Breadcrumb */}
-      <div className="flex items-center gap-2 text-sm text-gray-500 mb-8">
+      <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-8">
         <Link
           href="/catalogo"
           className="hover:text-green-700 flex items-center gap-1"
         >
-          <ChevronLeft className="w-4 h-4" /> Catálogo
+          <ChevronLeft className="size-4" /> Catálogo
         </Link>
         <span>/</span>
         <Link
@@ -87,13 +89,15 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           {product.category?.name}
         </Link>
         <span>/</span>
-        <span className="text-gray-900 font-medium">{product.name}</span>
+        <span className="text-gray-900 dark:text-white font-medium">
+          {product.name}
+        </span>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
         {/* Galería */}
         <div className="flex flex-col gap-4">
-          <div className="relative aspect-square bg-linear-to-br from-green-50 to-emerald-100 rounded-2xl overflow-hidden flex items-center justify-center">
+          <div className="relative aspect-square bg-linear-to-br from-green-50 dark:from-green-950 to-emerald-200 rounded-2xl overflow-hidden flex items-center justify-center">
             {images.length > 0 ? (
               <Image
                 src={images[activeImage]}
@@ -101,7 +105,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover p-4 object-center"
+                className="object-cover p-1 object-center"
               />
             ) : (
               <Leaf className="w-32 h-32 text-green-300" />
@@ -149,12 +153,15 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                 </Badge>
               )}
             </div>
-            <h1 className="text-3xl font-bold text-gray-900">{product.name}</h1>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+              {product.name}
+            </h1>
+            <FavoriteButton productId={product.id} />
           </div>
 
           {/* Precio */}
           <div className="flex items-end gap-3">
-            <span className="text-4xl font-bold text-gray-900">
+            <span className="text-4xl font-bold text-gray-900 dark:text-white">
               ${finalPrice.toFixed(2)}
             </span>
             {product.compare_price && (
@@ -209,13 +216,15 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
           {/* Cantidad */}
           <div>
-            <p className="text-sm font-medium text-gray-700 mb-2">Cantidad</p>
+            <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Cantidad
+            </p>
             <div className="flex items-center gap-3">
               <button
                 onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                className="w-10 h-10 rounded-xl border border-gray-200 flex items-center justify-center hover:border-green-400 transition-colors"
+                className="size-10 rounded-xl border border-gray-200 dark:border-gray-600 flex items-center justify-center hover:border-green-400 transition-colors"
               >
-                <Minus className="w-4 h-4" />
+                <Minus className="size-4" />
               </button>
               <span className="w-10 text-center font-semibold text-lg">
                 {quantity}
@@ -224,9 +233,9 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                 onClick={() =>
                   setQuantity(Math.min(product.stock_quantity, quantity + 1))
                 }
-                className="w-10 h-10 rounded-xl border border-gray-200 flex items-center justify-center hover:border-green-400 transition-colors"
+                className="size-10 rounded-xl border border-gray-200 dark:border-gray-600 flex items-center justify-center hover:border-green-400 transition-colors"
               >
-                <Plus className="w-4 h-4" />
+                <Plus className="size-4" />
               </button>
             </div>
           </div>
@@ -244,30 +253,30 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
           {/* Atributos botánicos */}
           {attr && (
-            <div className="bg-green-50 rounded-2xl p-5 grid grid-cols-2 gap-4">
-              <h3 className="col-span-2 font-semibold text-gray-900 text-sm">
+            <div className="bg-green-50 dark:bg-green-950/30 rounded-2xl p-5 grid grid-cols-2 gap-4">
+              <h3 className="col-span-2 font-semibold text-gray-900 dark:text-white text-sm">
                 Cuidados
               </h3>
               {attr.light_requirement && (
-                <div className="flex items-center gap-2 text-sm text-gray-700">
+                <div className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
                   <Sun className="w-4 h-4 text-yellow-500" />
                   {luzLabel[attr.light_requirement]}
                 </div>
               )}
               {attr.water_frequency && (
-                <div className="flex items-center gap-2 text-sm text-gray-700">
+                <div className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
                   <Droplets className="w-4 h-4 text-blue-500" />
                   {riegoLabel[attr.water_frequency]}
                 </div>
               )}
               {attr.care_difficulty && (
-                <div className="flex items-center gap-2 text-sm text-gray-700">
+                <div className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
                   <Leaf className="w-4 h-4 text-green-500" />
                   {dificultadLabel[attr.care_difficulty]}
                 </div>
               )}
               {attr.is_pet_friendly !== null && (
-                <div className="flex items-center gap-2 text-sm text-gray-700">
+                <div className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
                   <PawPrint className="w-4 h-4 text-blue-500" />
                   {attr.is_pet_friendly
                     ? "🐾 Pet friendly"
@@ -275,7 +284,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                 </div>
               )}
               {attr.mature_height_cm && (
-                <div className="flex items-center gap-2 text-sm text-gray-700 col-span-2">
+                <div className="flex items-center gap-2 text-sm text-gray-700 col-span-2 dark:text-gray-300">
                   <span className="text-green-600">↕</span>
                   Altura adulta: {attr.mature_height_cm} cm
                 </div>
@@ -286,27 +295,33 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           {/* Descripción */}
           {product.description && (
             <div>
-              <h3 className="font-semibold text-gray-900 mb-2">Descripción</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
+              <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
+                Descripción
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
                 {product.description}
               </p>
             </div>
           )}
 
           {/* Garantías */}
-          <div className="border-t border-gray-100 pt-4 flex flex-col gap-3">
-            <div className="flex items-center gap-3 text-sm text-gray-600">
+          <div className="border-t border-gray-200 dark:border-gray-600 pt-4 flex flex-col gap-3">
+            <div className="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-400">
               <Truck className="w-4 h-4 text-green-600 shrink-0" />
               {product.is_perishable
                 ? "Envío local con empaque especial para plantas vivas"
                 : "Envío nacional disponible"}
             </div>
-            <div className="flex items-center gap-3 text-sm text-gray-600">
+            <div className="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-400">
               <Shield className="w-4 h-4 text-green-600 shrink-0" />
               Garantía de calidad — si llega en mal estado lo reponemos
             </div>
           </div>
         </div>
+      </div>
+      {/* Reseñas */}
+      <div className="mt-16 border-t border-gray-100 dark:border-gray-800 pt-12">
+        <ReviewList productId={product.id} />
       </div>
     </div>
   );

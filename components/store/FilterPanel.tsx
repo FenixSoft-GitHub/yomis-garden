@@ -62,7 +62,7 @@ export default function FilterPanel() {
   return (
     <aside className="w-full">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="font-semibold text-gray-900">Filtros</h2>
+        <h2 className="font-semibold text-gray-900 dark:text-white">Filtros</h2>
         {hasFilters && (
           <Button
             variant="ghost"
@@ -77,7 +77,9 @@ export default function FilterPanel() {
 
       {/* Pet friendly e Interior */}
       <div className="mb-6">
-        <h3 className="text-sm font-medium text-gray-700 mb-2">Especiales</h3>
+        <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          Especiales
+        </h3>
         <div className="flex flex-col gap-2">
           {[
             { key: "pet_friendly", label: "🐾 Pet friendly" },
@@ -89,7 +91,7 @@ export default function FilterPanel() {
               className={`text-left text-sm px-3 py-2 rounded-lg border transition-colors ${
                 params.get(key)
                   ? "bg-green-600 text-white border-green-600"
-                  : "border-gray-200 text-gray-600 hover:border-green-400"
+                  : "border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:border-green-400"
               }`}
             >
               {label}
@@ -101,7 +103,7 @@ export default function FilterPanel() {
       {/* Luz, Riego, Dificultad */}
       {Object.entries(filtros).map(([key, opciones]) => (
         <div key={key} className="mb-6">
-          <h3 className="text-sm font-medium text-gray-700 mb-2 capitalize">
+          <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 capitalize">
             {key === "luz"
               ? "☀️ Luz"
               : key === "riego"
@@ -116,7 +118,7 @@ export default function FilterPanel() {
                 className={`text-left text-sm px-3 py-2 rounded-lg border transition-colors ${
                   params.get(key) === op.value
                     ? "bg-green-600 text-white border-green-600"
-                    : "border-gray-200 text-gray-600 hover:border-green-400"
+                    : "border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:border-green-400"
                 }`}
               >
                 {op.label}

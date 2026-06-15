@@ -9,12 +9,13 @@ import Logo from "./Logo";
 import AdminLink from "./AdminLink";
 import SearchBar from "@/components/store/SearchBar";
 import UserMenu from "@/components/layout/UserMenu";
+import ThemeToggle from "@/components/layout/ThemeToggle";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-white border-b border-green-100 shadow-sm">
+    <header className="sticky top-0 z-50 bg-white dark:bg-gray-950 border-b border-green-100 dark:border-gray-800 shadow-sm py-2">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 gap-6">
           {/* Logo */}
@@ -23,8 +24,8 @@ export default function Navbar() {
             className="flex items-center gap-2 font-bold text-green-700 text-xl shrink-0"
           >
             <Logo />
-            <span className="hidden sm:block">
-              Yomi&apos;s <span className="text-stone-600">Garden</span>
+            <span className="hidden sm:block dark:text-green-500">
+              Yomi&apos;s <span className="text-gray-600 dark:text-gray-400">Garden</span>
             </span>
           </Link>
 
@@ -34,10 +35,10 @@ export default function Navbar() {
           </div>
 
           {/* Nav desktop */}
-          <nav className="hidden md:flex items-center gap-5 text-sm font-medium text-gray-600">
+          <nav className="hidden lg:flex items-center gap-5 text-sm font-medium text-gray-600 dark:text-gray-400">
             <Link
               href="/catalogo"
-              className="hover:text-green-700 transition-colors"
+              className="hover:text-green-700 dark:hover:text-green-400 transition-colors"
             >
               Catálogo
             </Link>
@@ -71,6 +72,7 @@ export default function Navbar() {
           <div className="flex items-center gap-4 shrink-0">
             <AdminLink />
             <UserMenu />
+            <ThemeToggle />
             <Link href="/carrito" className="relative">
               <Button variant="ghost" size="icon" className="relative">
                 <ShoppingCart className="size-5" />
@@ -94,7 +96,7 @@ export default function Navbar() {
 
         {/* Nav mobile */}
         {menuOpen && (
-          <nav className="md:hidden py-4 border-t border-green-100 flex flex-col gap-3 text-sm font-medium text-gray-600">
+          <nav className="md:hidden py-4 border-t border-green-100 dark:border-gray-800 flex flex-col gap-3 text-sm font-medium text-gray-600 dark:text-gray-400">
             <Link href="/catalogo" onClick={() => setMenuOpen(false)}>
               Catálogo
             </Link>

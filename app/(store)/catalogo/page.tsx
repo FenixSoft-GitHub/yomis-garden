@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import { getProducts } from "@/lib/hooks/useProducts";
 import ProductCard from "@/components/store/ProductCard";
 import FilterPanel from "@/components/store/FilterPanel";
-import { Skeleton } from "@/components/ui/skeleton";
+// import { Skeleton } from "@/components/ui/skeleton";
 
 interface PageProps {
   searchParams: Promise<{ [key: string]: string | undefined }>;
@@ -29,8 +29,10 @@ export default async function CatalogoPage({ searchParams }: PageProps) {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">{titulo}</h1>
-        <p className="text-gray-500 mt-1">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+          {titulo}
+        </h1>
+        <p className="text-gray-500 dark:text-gray-400 mt-1">
           {products.length} productos encontrados
         </p>
       </div>
