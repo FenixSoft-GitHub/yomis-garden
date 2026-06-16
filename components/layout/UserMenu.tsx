@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { User, LogOut, Package, Heart } from "lucide-react";
+import { User, LogOut, Package, Heart, Award } from "lucide-react";
 import type { User as SupabaseUser } from "@supabase/supabase-js";
 
 export default function UserMenu() {
@@ -81,6 +81,15 @@ export default function UserMenu() {
           </div>
           <div className="py-1">
             <Link
+              href="/perfil"
+              onClick={() => setOpen(false)}
+              className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-green-950/30 hover:text-green-700 dark:hover:text-green-400 transition-colors"
+            >
+              <Award className="size-4" />
+              Mi perfil y puntos
+            </Link>
+
+            <Link
               href="/mis-pedidos"
               onClick={() => setOpen(false)}
               className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-green-950/30 hover:text-green-700 dark:hover:text-green-400 transition-colors"
@@ -94,7 +103,7 @@ export default function UserMenu() {
               onClick={() => setOpen(false)}
               className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-red-50 dark:hover:bg-red-950/30 hover:text-red-500 transition-colors"
             >
-              <Heart className="w-4 h-4" />
+              <Heart className="size-4" />
               Mis favoritos
             </Link>
 

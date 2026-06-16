@@ -163,3 +163,55 @@ export interface ProductRating {
   average_rating: number;
   total_reviews: number;
 }
+
+export type ProjectType =
+  | "residencial"
+  | "comercial"
+  | "corporativo"
+  | "evento";
+
+export type QuoteStatus =
+  | "nuevo"
+  | "contactado"
+  | "en_proceso"
+  | "cotizado"
+  | "cerrado"
+  | "cancelado";
+
+export interface LandscapingQuote {
+  id: string;
+  full_name: string;
+  email: string;
+  phone: string;
+  project_type: ProjectType;
+  area_m2: string | null;
+  budget: string | null;
+  description: string | null;
+  preferred_plants: string[];
+  status: QuoteStatus;
+  notes: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export type LoyaltyTier = "bronze" | "silver" | "gold";
+export type TransactionType = "earned" | "redeemed" | "bonus";
+
+export interface LoyaltyPoints {
+  id: string;
+  user_id: string;
+  points: number;
+  total_earned: number;
+  tier: LoyaltyTier;
+  updated_at: string;
+}
+
+export interface LoyaltyTransaction {
+  id: string;
+  user_id: string;
+  points: number;
+  type: TransactionType;
+  description: string;
+  order_id: string | null;
+  created_at: string;
+}

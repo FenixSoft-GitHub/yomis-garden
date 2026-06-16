@@ -17,43 +17,59 @@ export default function ReviewList({ productId }: ReviewListProps) {
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const fetchReviews = async () => {
-    const supabase = createClient();
-
-    const [{ data: reviewsData }, { data: user }] = await Promise.all([
-      supabase
-        .from("reviews")
-        .select("*, profiles(full_name)")
-        .eq("product_id", productId)
-        .eq("is_approved", true)
-        .order("created_at", { ascending: false }),
-      supabase.auth.getUser(),
-    ]);
-
-    setReviews((reviewsData as Review[]) ?? []);
-    setIsLoggedIn(!!user.user);
-
-    // Calcular promedio
-    if (reviewsData && reviewsData.length > 0) {
-      const avg =
-        reviewsData.reduce((sum, r) => sum + r.rating, 0) / reviewsData.length;
-      setRating({
-        average_rating: Math.round(avg * 10) / 10,
-        total_reviews: reviewsData.length,
-      });
-    }
-
-    setLoading(false);
-  };
+  const [refreshKey, setRefreshKey] = useState(0);
 
   useEffect(() => {
-    fetchReviews();
-  }, [productId]);
+    let cancelled = false;
+
+    const load = async () => {
+      setLoading(true);
+      const supabase = createClient();
+
+      const [
+        { data: reviewsData },
+        {
+          data: { user },
+        },
+      ] = await Promise.all([
+        supabase
+          .from("reviews")
+          .select("*, profiles(full_name)")
+          .eq("product_id", productId)
+          .eq("is_approved", true)
+          .order("created_at", { ascending: false }),
+        supabase.auth.getUser(),
+      ]);
+
+      if (cancelled) return;
+
+      setReviews((reviewsData as Review[]) ?? []);
+      setIsLoggedIn(!!user);
+
+      if (reviewsData && reviewsData.length > 0) {
+        const avg =
+          reviewsData.reduce((sum, r) => sum + r.rating, 0) /
+          reviewsData.length;
+        setRating({
+          average_rating: Math.round(avg * 10) / 10,
+          total_reviews: reviewsData.length,
+        });
+      } else {
+        setRating(null);
+      }
+
+      setLoading(false);
+    };
+
+    load();
+    return () => {
+      cancelled = true;
+    };
+  }, [productId, refreshKey]);
 
   const handleReviewSuccess = () => {
     setShowForm(false);
-    fetchReviews();
+    setRefreshKey((prev) => prev + 1);
   };
 
   if (loading) {

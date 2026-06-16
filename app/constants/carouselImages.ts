@@ -2,7 +2,7 @@
 // Aquí puedes colocar fotos reales de tus plantas, cactus, árboles frutales, etc.
 export const carouselImages = [
   {
-    src: "/images/hero-plants-1.webp", // Asegúrate de tener estas imágenes en tu carpeta public/images
+    src: "/images/hero-plants-1.webp", 
     alt: "Variedad de plantas ornamentales para interiores",
   },
   {

@@ -25,7 +25,8 @@ export default function Navbar() {
           >
             <Logo />
             <span className="hidden sm:block dark:text-green-500">
-              Yomi&apos;s <span className="text-gray-600 dark:text-gray-400">Garden</span>
+              Yomi&apos;s{" "}
+              <span className="text-gray-600 dark:text-gray-400">Garden</span>
             </span>
           </Link>
 
@@ -44,27 +45,33 @@ export default function Navbar() {
             </Link>
             <Link
               href="/catalogo?categoria=arboles"
-              className="hover:text-green-700 transition-colors"
+              className="hover:text-green-700 dark:hover:text-green-400 transition-colors"
             >
               Árboles
             </Link>
             <Link
               href="/catalogo?categoria=ornamentales"
-              className="hover:text-green-700 transition-colors"
+              className="hover:text-green-700 dark:hover:text-green-400 transition-colors"
             >
               Ornamentales
             </Link>
             <Link
               href="/catalogo?categoria=cactus-suculentas"
-              className="hover:text-green-700 transition-colors"
+              className="hover:text-green-700 dark:hover:text-green-400 transition-colors"
             >
               Cactus
             </Link>
             <Link
               href="/catalogo?categoria=macetas"
-              className="hover:text-green-700 transition-colors"
+              className="hover:text-green-700 dark:hover:text-green-400 transition-colors"
             >
               Macetas
+            </Link>
+            <Link
+              href="/paisajismo"
+              className="hover:text-green-700 dark:hover:text-green-400 transition-colors"
+            >
+              Paisajismo
             </Link>
           </nav>
 

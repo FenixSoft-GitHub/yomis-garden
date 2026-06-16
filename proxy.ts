@@ -2,8 +2,12 @@ import { type NextRequest, NextResponse } from "next/server";
 import { updateSession } from "@/lib/supabase/middleware";
 import { createServerClient } from "@supabase/ssr";
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  if (pathname.startsWith("/api")) {
+    return NextResponse.next();
+  }
 
   // Proteger rutas /admin (excepto /admin/login)
   if (pathname.startsWith("/admin") && !pathname.startsWith("/admin/login")) {
@@ -28,7 +32,6 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(new URL("/admin/login", request.url));
     }
 
-    // Verificar rol admin
     const { data: profile } = await supabase
       .from("profiles")
       .select("role")

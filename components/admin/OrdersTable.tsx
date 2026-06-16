@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { ChevronDown, Eye } from "lucide-react";
 import { toast } from "sonner";
@@ -67,6 +67,7 @@ export default function OrdersTable({
     value: string,
   ) => {
     setUpdating(orderId);
+
     const res = await fetch("/api/admin/orders", {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
@@ -79,6 +80,8 @@ export default function OrdersTable({
       );
       toast.success("Estado actualizado");
     } else {
+      const err = await res.json();
+      console.log("Error response:", err); // ← agrega este log
       toast.error("Error al actualizar");
     }
     setUpdating(null);
@@ -131,7 +134,7 @@ export default function OrdersTable({
               const isExpanded = expandedOrder === order.id;
 
               return (
-                <>
+                <React.Fragment key={order.id}>
                   <tr
                     key={order.id}
                     className="border-b border-gray-800 hover:bg-gray-800/50 transition-colors"
@@ -309,7 +312,7 @@ export default function OrdersTable({
                       </td>
                     </tr>
                   )}
-                </>
+                </React.Fragment>
               );
             })}
           </tbody>

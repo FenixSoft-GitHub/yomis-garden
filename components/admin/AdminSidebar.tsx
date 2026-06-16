@@ -11,6 +11,7 @@ import {
   LogOut,
   ExternalLink,
   MessageSquare,
+  TreePine,
 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
@@ -21,6 +22,7 @@ const navItems = [
   { href: "/admin/pedidos", icon: ShoppingBag, label: "Pedidos" },
   { href: "/admin/productos", icon: Package, label: "Productos" },
   { href: "/admin/resenas", icon: MessageSquare, label: "Reseñas" },
+  { href: "/admin/paisajismo", icon: TreePine, label: "Paisajismo" },
   { href: "/admin/reportes", icon: BarChart3, label: "Reportes" },
   { href: "/admin/configuracion", icon: Settings, label: "Configuración" },
 ];

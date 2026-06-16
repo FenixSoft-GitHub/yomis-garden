@@ -17,7 +17,7 @@ export default function FavoriteButton({
   className,
   size = "md",
 }: FavoriteButtonProps) {
-  const { init, toggle, isFavorite, initialized } = useFavoritesStore();
+  const { init, toggle, isFavorite } = useFavoritesStore();
   const favorite = isFavorite(productId);
 
   useEffect(() => {

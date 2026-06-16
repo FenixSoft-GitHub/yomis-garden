@@ -24,6 +24,7 @@ export default function Logo({
       alt="Yomi's Garden"
       width={width}
       height={height}
+      style={{ height: "auto" }}
       className={`${autoRatioClass} ${className} rounded-full animate-pulse`.trim()}
     />
   );

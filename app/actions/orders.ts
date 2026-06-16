@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import type { CheckoutFormData } from "@/lib/schemas/checkout.schema";
 import type { CartItem } from "@/lib/types";
+import { sendOrderConfirmation } from "@/lib/emails/sendEmail";
 
 export async function createOrder(
   formData: CheckoutFormData,
@@ -95,6 +96,39 @@ export async function createOrder(
     await adminSupabase.rpc("decrement_stock", {
       p_product_id: item.product.id,
       p_quantity: item.quantity,
+    });
+  }
+
+  await sendOrderConfirmation({
+    to: formData.email,
+    orderNumber: order.order_number,
+    customerName: formData.full_name,
+    items: orderItems.map((item) => ({
+      product_name: item.product_name,
+      quantity: item.quantity,
+      unit_price: item.unit_price,
+      total_price: item.total_price,
+    })),
+    subtotal,
+    shippingCost: shipping_cost,
+    total,
+    paymentMethod: formData.payment_method,
+    paymentReference: formData.payment_reference,
+    shippingAddress: {
+      address_line1: formData.address_line1,
+      address_line2: formData.address_line2,
+      city: formData.city,
+      state: formData.state,
+      country: "Venezuela",
+    },
+  });
+
+  // Otorgar puntos si el usuario está autenticado
+  if (user?.id) {
+    await adminSupabase.rpc("award_loyalty_points", {
+      p_user_id: user.id,
+      p_order_id: order.id,
+      p_order_total: total,
     });
   }
 
