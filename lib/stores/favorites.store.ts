@@ -39,8 +39,11 @@ export const useFavoritesStore = create<FavoritesStore>((set, get) => ({
     const {
       data: { user },
     } = await supabase.auth.getUser();
+    
     if (!user) {
-      window.location.href = "/auth";
+      if (typeof window !== "undefined") {
+        window.location.href = "/auth";
+      }
       return;
     }
 
