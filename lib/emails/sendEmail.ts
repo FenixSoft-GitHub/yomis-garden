@@ -3,8 +3,21 @@ import { OrderConfirmationEmail } from "./OrderConfirmation";
 import { OrderStatusUpdateEmail } from "./OrderStatusUpdate";
 import * as React from "react";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-const FROM = process.env.RESEND_FROM_EMAIL ?? "noreply@yomisgarden.com";
+function getResend() {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) throw new Error("RESEND_API_KEY no configurada");
+  return new Resend(apiKey);
+}
+
+function getFrom() {
+  return `Yomi's Garden <${process.env.RESEND_FROM_EMAIL ?? "onboarding@resend.dev"}>`;
+}
+
+function getTo(email: string) {
+  return process.env.NODE_ENV === "development"
+    ? (process.env.RESEND_TEST_EMAIL ?? email)
+    : email;
+}
 
 export async function sendOrderConfirmation(params: {
   to: string;
@@ -30,12 +43,10 @@ export async function sendOrderConfirmation(params: {
   };
 }) {
   try {
+    const resend = getResend();
     await resend.emails.send({
-      from: `Yomi's Garden <${FROM}>`,
-      to:
-        process.env.NODE_ENV === "development"
-          ? (process.env.RESEND_TEST_EMAIL ?? params.to)
-          : params.to,
+      from: getFrom(),
+      to: getTo(params.to),
       subject: `✅ Pedido confirmado ${params.orderNumber} — Yomi's Garden`,
       react: React.createElement(OrderConfirmationEmail, params),
     });
@@ -52,12 +63,10 @@ export async function sendOrderStatusUpdate(params: {
   total: number;
 }) {
   try {
+    const resend = getResend();
     await resend.emails.send({
-      from: `Yomi's Garden <${FROM}>`,
-      to:
-        process.env.NODE_ENV === "development"
-          ? (process.env.RESEND_TEST_EMAIL ?? params.to)
-          : params.to,
+      from: getFrom(),
+      to: getTo(params.to),
       subject: `📦 Tu pedido ${params.orderNumber} fue actualizado — Yomi's Garden`,
       react: React.createElement(OrderStatusUpdateEmail, params),
     });
