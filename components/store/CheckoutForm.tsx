@@ -22,11 +22,16 @@ import { toast } from "sonner";
 import Image from "next/image";
 import { estadosVenezuela } from "@/app/constants/estadosVenezuela";
 import { paymentMethods } from "@/app/constants/paymentMethods";
+import StripeCheckoutButton from "./StripeCheckoutButton";
 
 export default function CheckoutForm() {
   const router = useRouter();
   const { items, totalItems, totalPrice, clearCart } = useCartStore();
   const [loading, setLoading] = useState(false);
+  const [stripeOrder, setStripeOrder] = useState<{
+    orderId: string;
+    orderNumber: string;
+  } | null>(null);
 
   const {
     register,
@@ -44,6 +49,11 @@ export default function CheckoutForm() {
     control,
     name: "payment_method",
   });
+  
+  const customerEmail = useWatch({
+    control,
+    name: "email",
+  });
 
   if (totalItems() === 0) {
     router.replace("/catalogo");
@@ -58,6 +68,16 @@ export default function CheckoutForm() {
         toast.error(result.error ?? "Error al procesar el pedido");
         return;
       }
+      // Si el método es Stripe, mostrar botón de pago
+      if (data.payment_method === "stripe") {
+        setStripeOrder({
+          orderId: result.orderId!,
+          orderNumber: result.orderNumber!,
+        });
+        setLoading(false);
+        return;
+      }
+
       clearCart();
       toast.success("¡Pedido creado exitosamente! 🌿");
       router.push(`/pedido-confirmado?order=${result.orderNumber}`);
@@ -379,6 +399,20 @@ export default function CheckoutForm() {
                 <>Confirmar pedido</>
               )}
             </Button>
+
+            {stripeOrder && paymentMethod === "stripe" && (
+              <div className="mt-4">
+                <p className="text-sm text-gray-500 dark:text-gray-400 text-center mb-3">
+                  Tu pedido fue creado. Completa el pago:
+                </p>
+                <StripeCheckoutButton
+                  items={items}
+                  customerEmail={customerEmail}
+                  orderId={stripeOrder.orderId}
+                  orderNumber={stripeOrder.orderNumber}
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>
