@@ -4,6 +4,10 @@ import type { CartItem, Product, ProductVariant } from "@/lib/types";
 
 interface CartStore {
   items: CartItem[];
+  isOpen: boolean;
+  openCart: () => void;
+  closeCart: () => void;
+  toggleCart: () => void;
   addItem: (
     product: Product,
     variant?: ProductVariant,
@@ -24,6 +28,11 @@ export const useCartStore = create<CartStore>()(
   persist(
     (set, get) => ({
       items: [],
+      isOpen: false,
+
+      openCart: () => set({ isOpen: true }),
+      closeCart: () => set({ isOpen: false }),
+      toggleCart: () => set((state) => ({ isOpen: !state.isOpen })),
 
       addItem: (product, variant, quantity = 1) => {
         set((state) => {
@@ -35,9 +44,12 @@ export const useCartStore = create<CartStore>()(
           if (existingIndex >= 0) {
             const updated = [...state.items];
             updated[existingIndex].quantity += quantity;
-            return { items: updated };
+            return { items: updated, isOpen: true };
           }
-          return { items: [...state.items, { product, variant, quantity }] };
+          return {
+            items: [...state.items, { product, variant, quantity }],
+            isOpen: true,
+          };
         });
       },
 
@@ -78,6 +90,9 @@ export const useCartStore = create<CartStore>()(
           return sum + (base + modifier) * item.quantity;
         }, 0),
     }),
-    { name: "yomis-cart" },
+    {
+      name: "yomis-cart",
+      partialize: (state) => ({ items: state.items }),
+    },
   ),
 );

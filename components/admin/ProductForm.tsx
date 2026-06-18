@@ -15,6 +15,7 @@ import {
   type ProductFormData,
 } from "@/lib/schemas/product.schema";
 import type { ProductFormProps } from "@/lib/types/admin";
+import { BOTANICAL_OPTIONS } from "@/app/constants/botanicalFilters";
 
 export default function ProductForm({
   categories,
@@ -27,7 +28,6 @@ export default function ProductForm({
   const {
     register,
     handleSubmit,
-    // watch,
     control,
     setValue,
     formState: { errors },
@@ -102,7 +102,7 @@ export default function ProductForm({
   ];
 
   const botanicalBooleans: { field: keyof ProductFormData; label: string }[] = [
-    { field: "is_pet_friendly", label: "🐾 Pet friendly" },
+    { field: "is_pet_friendly", label: "🐾 Apto para mascotas" },
     { field: "is_indoor", label: "🏠 Interior" },
     { field: "is_outdoor", label: "🌳 Exterior" },
   ];
@@ -272,12 +272,23 @@ export default function ProductForm({
                 {...register("light_requirement")}
                 className="mt-1 w-full bg-gray-800 border border-gray-700 text-white px-3 py-2 text-sm rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
               >
+                <option value="">Seleccionar luz...</option>
+                {BOTANICAL_OPTIONS.luz.map((opt) => (
+                  <option key={opt.value} value={opt.value}>
+                    {opt.label}
+                  </option>
+                ))}
+              </select>
+              {/* <select
+                {...register("light_requirement")}
+                className="mt-1 w-full bg-gray-800 border border-gray-700 text-white px-3 py-2 text-sm rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+              >
                 <option value="">Sin especificar</option>
                 <option value="sol_directo">☀️ Sol directo</option>
                 <option value="sol_parcial">⛅ Sol parcial</option>
                 <option value="sombra">🌥️ Sombra</option>
                 <option value="interior">🏠 Interior</option>
-              </select>
+              </select> */}
             </div>
             <div>
               <Label className="text-gray-300">Frecuencia de riego</Label>
@@ -285,13 +296,24 @@ export default function ProductForm({
                 {...register("water_frequency")}
                 className="mt-1 w-full bg-gray-800 border border-gray-700 text-white px-3 py-2 text-sm rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
               >
-                <option value="">Sin especificar</option>
+                <option value="">Seleccionar riego...</option>
+                {BOTANICAL_OPTIONS.riego.map((opt) => (
+                  <option key={opt.value} value={opt.value}>
+                    {opt.label}
+                  </option>
+                ))}
+              </select>
+              {/* <select
+                {...register("water_frequency")}
+                className="mt-1 w-full bg-gray-800 border border-gray-700 text-white px-3 py-2 text-sm rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+              >
+                <option value="">Seleccionar riego...</option>
                 <option value="diario">💧 Diario</option>
                 <option value="cada_2_dias">💧 Cada 2 días</option>
                 <option value="semanal">💧 Semanal</option>
                 <option value="quincenal">💧 Quincenal</option>
                 <option value="mensual">💧 Mensual</option>
-              </select>
+              </select> */}
             </div>
             <div>
               <Label className="text-gray-300">Dificultad</Label>
@@ -299,11 +321,22 @@ export default function ProductForm({
                 {...register("care_difficulty")}
                 className="mt-1 w-full bg-gray-800 border border-gray-700 text-white px-3 py-2 text-sm rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
               >
+                <option value="">Seleccionar Dificultad...</option>
+                {BOTANICAL_OPTIONS.dificultad.map((opt) => (
+                  <option key={opt.value} value={opt.value}>
+                    {opt.label}
+                  </option>
+                ))}
+              </select>
+              {/* <select
+                {...register("care_difficulty")}
+                className="mt-1 w-full bg-gray-800 border border-gray-700 text-white px-3 py-2 text-sm rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+              >
                 <option value="">Sin especificar</option>
                 <option value="facil">🟢 Fácil</option>
                 <option value="moderado">🟡 Moderado</option>
                 <option value="experto">🔴 Experto</option>
-              </select>
+              </select> */}
             </div>
           </div>
           <div className="flex flex-wrap gap-4 mt-4">
@@ -315,7 +348,7 @@ export default function ProductForm({
                 <input
                   type="checkbox"
                   {...register(field)}
-                  className="w-4 h-4 accent-green-500"
+                  className="size-4 accent-green-500"
                 />
                 <span className="text-gray-300 text-sm">{label}</span>
               </label>

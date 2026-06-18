@@ -3,27 +3,7 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
-
-const filtros = {
-  luz: [
-    { value: "sol_directo", label: "☀️ Sol directo" },
-    { value: "sol_parcial", label: "⛅ Sol parcial" },
-    { value: "sombra", label: "🌥️ Sombra" },
-    { value: "interior", label: "🏠 Interior" },
-  ],
-  riego: [
-    { value: "diario", label: "💧 Diario" },
-    { value: "cada_2_dias", label: "💧 Cada 2 días" },
-    { value: "semanal", label: "💧 Semanal" },
-    { value: "quincenal", label: "💧 Quincenal" },
-    { value: "mensual", label: "💧 Mensual" },
-  ],
-  dificultad: [
-    { value: "facil", label: "🟢 Fácil" },
-    { value: "moderado", label: "🟡 Moderado" },
-    { value: "experto", label: "🔴 Experto" },
-  ],
-};
+import { BOTANICAL_OPTIONS } from "@/app/constants/botanicalFilters";
 
 export default function FilterPanel() {
   const router = useRouter();
@@ -101,7 +81,7 @@ export default function FilterPanel() {
       </div>
 
       {/* Luz, Riego, Dificultad */}
-      {Object.entries(filtros).map(([key, opciones]) => (
+      {Object.entries(BOTANICAL_OPTIONS).map(([key, opciones]) => (
         <div key={key} className="mb-6">
           <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 capitalize">
             {key === "luz"
@@ -121,7 +101,12 @@ export default function FilterPanel() {
                     : "border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:border-green-400"
                 }`}
               >
-                {op.label}
+                <div className="flex items-center justify-between w-full">
+                  <span>{op.label}</span>
+                  {params.get(key) === op.value && (
+                    <X className="size-3.5 opacity-80" />
+                  )}
+                </div>
               </button>
             ))}
           </div>

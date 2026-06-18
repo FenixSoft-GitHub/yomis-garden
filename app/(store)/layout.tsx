@@ -1,6 +1,8 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Toaster } from "@/components/ui/sonner";
+import CartDrawer from "@/components/store/CartDrawer";
+import WhatsAppButton from "@/components/store/WhatsAppButton";
 
 export default function StoreLayout({
   children,
@@ -13,6 +15,8 @@ export default function StoreLayout({
       <main className="flex-1">{children}</main>
       <Footer />
       <Toaster richColors position="bottom-right" />
+      <CartDrawer />
+      <WhatsAppButton />
     </div>
   );
 }

@@ -14,7 +14,7 @@ export default function SponsorsCarousel() {
 
     let animationFrame: number;
     let lastTimestamp = performance.now();
-    const speed = 60;
+    const speed = 40;
 
     const animate = (now: number) => {
       if (!isPaused) {
@@ -41,15 +41,15 @@ export default function SponsorsCarousel() {
   if (!sponsors || sponsors.length === 0) return null;
 
   return (
-    <div className="w-full bg-green-950 dark:bg-gray-950 py-6 overflow-hidden border-y border-green-900 dark:border-gray-800">
+    <section className="w-full bg-linear-to-b from-gray-300 to-white dark:from-gray-950/20 dark:to-gray-700 py-6 border-b border-gray-300 dark:border-gray-900/40">
       <div className="max-w-7xl mx-auto px-4 mb-6">
-        <h3 className="text-center text-sm font-semibold text-gray-300 dark:text-gray-200 uppercase tracking-wider">
-          Nuestra marca y productos
+        <h3 className="text-center text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest">
+          Nuestras Marcas Aliadas y Productos
         </h3>
       </div>
 
       {/* Contenedor con máscara de desvanecimiento v4 */}
-      <div className="relative w-full mask-[linear-gradient(to_right,transparent_0%,white_10%,white_90%,transparent_100%)]">
+      <div className="relative w-full mask-[linear-gradient(to_right,transparent_0%,white_15%,white_85%,transparent_100%)]">
         <div
           ref={trackRef}
           className="overflow-x-scroll scrollbar-none flex gap-16 md:gap-20 whitespace-nowrap px-10 group"
@@ -78,6 +78,6 @@ export default function SponsorsCarousel() {
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 }

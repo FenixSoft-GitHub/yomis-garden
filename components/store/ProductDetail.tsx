@@ -22,27 +22,13 @@ import {
 } from "lucide-react";
 import FavoriteButton from "./FavoriteButton";
 import ReviewList from "./ReviewList";
-
-const luzLabel: Record<string, string> = {
-  sol_directo: "☀️ Sol directo",
-  sol_parcial: "⛅ Sol parcial",
-  sombra: "🌥️ Sombra",
-  interior: "🏠 Interior",
-};
-
-const riegoLabel: Record<string, string> = {
-  diario: "💧 Diario",
-  cada_2_dias: "💧 Cada 2 días",
-  semanal: "💧 Semanal",
-  quincenal: "💧 Quincenal",
-  mensual: "💧 Mensual",
-};
-
-const dificultadLabel: Record<string, string> = {
-  facil: "🟢 Fácil",
-  moderado: "🟡 Moderado",
-  experto: "🔴 Experto",
-};
+import ImageZoom from "./ImageZoom";
+import ShareButtons from "./ShareButtons";
+import {
+  LUZ_LABELS,
+  RIEGO_LABELS,
+  DIFICULTAD_LABELS,
+} from "@/app/constants/botanicalFilters";
 
 interface ProductDetailProps {
   product: Product;
@@ -53,8 +39,8 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   const [selectedVariant, setSelectedVariant] = useState<
     ProductVariant | undefined
   >(product.product_variants?.[0]);
-  const [activeImage, setActiveImage] = useState(0);
   const addItem = useCartStore((s) => s.addItem);
+  const [activeImage, setActiveImage] = useState(0);
 
   const attr = product.plant_attributes;
   const variants = product.product_variants ?? [];
@@ -62,9 +48,13 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   const isOutOfStock = product.stock_quantity === 0;
   const isLowStock =
     product.stock_quantity <= product.low_stock_threshold && !isOutOfStock;
-
   const finalPrice =
     Number(product.base_price) + (selectedVariant?.price_modifier ?? 0);
+
+  const productUrl =
+    typeof window !== "undefined"
+      ? `${window.location.origin}/producto/${product.slug}`
+      : `/producto/${product.slug}`;
 
   const handleAddToCart = () => {
     addItem(product, selectedVariant, quantity);
@@ -77,67 +67,29 @@ export default function ProductDetail({ product }: ProductDetailProps) {
       <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-8">
         <Link
           href="/catalogo"
-          className="hover:text-green-700 flex items-center gap-1"
+          className="hover:text-green-700 dark:hover:text-green-400 flex items-center gap-1"
         >
           <ChevronLeft className="size-4" /> Catálogo
         </Link>
         <span>/</span>
         <Link
           href={`/catalogo?categoria=${product.category?.slug}`}
-          className="hover:text-green-700"
+          className="hover:text-green-700 dark:hover:text-green-400"
         >
           {product.category?.name}
         </Link>
         <span>/</span>
-        <span className="text-gray-900 dark:text-white font-medium">
+        <span className="text-gray-900 dark:text-white font-medium truncate max-w-48">
           {product.name}
         </span>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        {/* Galería */}
-        <div className="flex flex-col gap-4">
-          <div className="relative aspect-square bg-linear-to-br from-green-50 dark:from-green-950 to-emerald-200 rounded-2xl overflow-hidden flex items-center justify-center">
-            {images.length > 0 ? (
-              <Image
-                src={images[activeImage]}
-                alt={product.name}
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover p-1 object-center"
-              />
-            ) : (
-              <Leaf className="w-32 h-32 text-green-300" />
-            )}
-          </div>
-          {images.length > 1 && (
-            <div className="flex gap-3">
-              {images.map((img, i) => (
-                <button
-                  key={i}
-                  onClick={() => setActiveImage(i)}
-                  className={`relative w-20 h-20 rounded-xl overflow-hidden border-2 transition-colors ${
-                    activeImage === i
-                      ? "border-green-600 scale-95"
-                      : "border-transparent opacity-70 hover:opacity-100"
-                  }`}
-                >
-                  <Image
-                    src={img}
-                    alt={`Miniatura ${i + 1} de ${product.name}`}
-                    fill
-                    sizes="80px"
-                    className="object-cover"
-                  />
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
+        {/* Galería con zoom */}
+        <ImageZoom images={images} productName={product.name} />
 
         {/* Info */}
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-5">
           {/* Encabezado */}
           <div>
             <div className="flex items-center gap-2 mb-2">
@@ -153,10 +105,12 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                 </Badge>
               )}
             </div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-              {product.name}
-            </h1>
-            <FavoriteButton productId={product.id} />
+            <div className="flex items-start justify-between gap-4">
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+                {product.name}
+              </h1>
+              <FavoriteButton productId={product.id} />
+            </div>
           </div>
 
           {/* Precio */}
@@ -189,7 +143,9 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           {/* Variantes */}
           {variants.length > 0 && (
             <div>
-              <p className="text-sm font-medium text-gray-700 mb-2">Variante</p>
+              <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Variante
+              </p>
               <div className="flex flex-wrap gap-2">
                 {variants.map((v) => (
                   <button
@@ -198,7 +154,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                     className={`px-4 py-2 rounded-xl border text-sm font-medium transition-colors ${
                       selectedVariant?.id === v.id
                         ? "bg-green-600 text-white border-green-600"
-                        : "border-gray-200 text-gray-700 hover:border-green-400"
+                        : "border-gray-200 text-gray-700 dark:text-gray-300 hover:border-green-400"
                     }`}
                   >
                     {v.name}
@@ -226,14 +182,14 @@ export default function ProductDetail({ product }: ProductDetailProps) {
               >
                 <Minus className="size-4" />
               </button>
-              <span className="w-10 text-center font-semibold text-lg">
+              <span className="w-10 text-center font-semibold text-lg text-gray-900 dark:text-white">
                 {quantity}
               </span>
               <button
                 onClick={() =>
                   setQuantity(Math.min(product.stock_quantity, quantity + 1))
                 }
-                className="size-10 rounded-xl border border-gray-200 dark:border-gray-600 flex items-center justify-center hover:border-green-400 transition-colors"
+                className="size-10 rounded-xl border border-gray-200 dark:border-gray-600 flex items-center justify-center hover:border-green-400 transition-colors text-gray-700 dark:text-gray-300"
               >
                 <Plus className="size-4" />
               </button>
@@ -247,39 +203,46 @@ export default function ProductDetail({ product }: ProductDetailProps) {
             disabled={isOutOfStock}
             className="bg-green-600 hover:bg-green-700 text-white gap-2 w-full"
           >
-            <ShoppingCart className="w-5 h-5" />
+            <ShoppingCart className="size-5" />
             {isOutOfStock ? "Sin stock" : "Agregar al carrito"}
           </Button>
+
+          {/* Compartir */}
+          <ShareButtons
+            productName={product.name}
+            productUrl={productUrl}
+            price={finalPrice}
+          />
 
           {/* Atributos botánicos */}
           {attr && (
             <div className="bg-green-50 dark:bg-green-950/30 rounded-2xl p-5 grid grid-cols-2 gap-4">
-              <h3 className="col-span-2 font-semibold text-gray-900 dark:text-white text-sm">
+              <h3 className="col-span-2 font-semibold text-gray-900 dark:text-gray-300 text-sm">
                 Cuidados
               </h3>
               {attr.light_requirement && (
                 <div className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
-                  <Sun className="w-4 h-4 text-yellow-500" />
-                  {luzLabel[attr.light_requirement]}
+                  <Sun className="size-4 text-yellow-500" />
+                  {LUZ_LABELS[attr.light_requirement]}
                 </div>
               )}
               {attr.water_frequency && (
                 <div className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
-                  <Droplets className="w-4 h-4 text-blue-500" />
-                  {riegoLabel[attr.water_frequency]}
+                  <Droplets className="size-4 text-blue-500" />
+                  {RIEGO_LABELS[attr.water_frequency]}
                 </div>
               )}
               {attr.care_difficulty && (
                 <div className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
-                  <Leaf className="w-4 h-4 text-green-500" />
-                  {dificultadLabel[attr.care_difficulty]}
+                  <Leaf className="size-4 text-green-500" />
+                  {DIFICULTAD_LABELS[attr.care_difficulty]}
                 </div>
               )}
               {attr.is_pet_friendly !== null && (
                 <div className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
-                  <PawPrint className="w-4 h-4 text-blue-500" />
+                  <PawPrint className="size-4 text-blue-500" />
                   {attr.is_pet_friendly
-                    ? "🐾 Pet friendly"
+                    ? "🐾 Apto para mascotas"
                     : "⚠️ No apto mascotas"}
                 </div>
               )}
@@ -307,22 +270,22 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           {/* Garantías */}
           <div className="border-t border-gray-200 dark:border-gray-600 pt-4 flex flex-col gap-3">
             <div className="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-400">
-              <Truck className="w-4 h-4 text-green-600 shrink-0" />
+              <Truck className="size-4 text-green-600 shrink-0" />
               {product.is_perishable
                 ? "Envío local con empaque especial para plantas vivas"
                 : "Envío nacional disponible"}
             </div>
             <div className="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-400">
-              <Shield className="w-4 h-4 text-green-600 shrink-0" />
+              <Shield className="size-4 text-green-600 shrink-0" />
               Garantía de calidad — si llega en mal estado lo reponemos
             </div>
           </div>
         </div>
       </div>
       {/* Reseñas */}
-      <div className="mt-16 border-t border-gray-100 dark:border-gray-800 pt-12">
+      {/* <div className="mt-16 border-t border-gray-100 dark:border-gray-800 pt-12">
         <ReviewList productId={product.id} />
-      </div>
+      </div> */}
     </div>
   );
 }

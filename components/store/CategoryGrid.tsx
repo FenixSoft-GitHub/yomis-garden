@@ -1,56 +1,6 @@
 import Link from "next/link";
-import { Leaf } from "lucide-react";
-
-const categories = [
-  {
-    name: "Árboles",
-    slug: "arboles",
-    emoji: "🌳",
-    desc: "Frutales y ornamentales",
-    color: "from-emerald-400 to-green-600",
-    image: null,
-  },
-  {
-    name: "Ornamentales",
-    slug: "ornamentales",
-    emoji: "🌸",
-    desc: "Flores y follaje decorativo",
-    color: "from-pink-400 to-rose-600",
-    image: null,
-  },
-  {
-    name: "Cactus y Suculentas",
-    slug: "cactus-suculentas",
-    emoji: "🌵",
-    desc: "Bajo mantenimiento",
-    color: "from-amber-400 to-orange-600",
-    image: null,
-  },
-  {
-    name: "Macetas",
-    slug: "macetas",
-    emoji: "🪴",
-    desc: "Porrones y accesorios",
-    color: "from-stone-400 to-amber-700",
-    image: null,
-  },
-  {
-    name: "Sustratos",
-    slug: "sustratos",
-    emoji: "🌱",
-    desc: "Tierra y nutrientes",
-    color: "from-lime-400 to-green-700",
-    image: null,
-  },
-  {
-    name: "Herramientas",
-    slug: "herramientas",
-    emoji: "🛠️",
-    desc: "Todo para jardinería",
-    color: "from-blue-400 to-indigo-600",
-    image: null,
-  },
-];
+import Image from "next/image";
+import { categories } from "@/app/constants/categories";
 
 export default function CategoryGrid() {
   return (
@@ -65,22 +15,28 @@ export default function CategoryGrid() {
           </p>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-          {categories.map(({ name, slug, emoji, desc, color }) => (
+          {categories.map(({ name, slug, image, desc }) => (
             <Link
               key={slug}
               href={`/catalogo?categoria=${slug}`}
               className="group flex flex-col items-center gap-3 p-5 rounded-2xl border border-gray-300 dark:border-gray-800 bg-white dark:bg-gray-900 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
             >
-              <div
-                className={`w-14 h-14 rounded-2xl bg-linear-to-br ${color} flex items-center justify-center text-2xl shadow-sm group-hover:scale-110 transition-transform duration-300`}
-              >
-                {emoji}
+              <div className="relative size-32 rounded-2xl aspect-square overflow-hidden shadow-sm group-hover:scale-105 transition-transform duration-300 bg-gray-100 dark:bg-gray-800">
+                <Image
+                  src={image}
+                  alt={`Categoría ${name}`}
+                  fill
+                  sizes="(max-width: 640px) 128px, 128px" 
+                  className="object-cover object-center transition-transform duration-500"
+                  priority={slug === "arboles"}
+                />
               </div>
+
               <div className="text-center">
                 <p className="font-semibold text-gray-900 dark:text-white text-sm leading-tight">
                   {name}
                 </p>
-                <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">
+                <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
                   {desc}
                 </p>
               </div>

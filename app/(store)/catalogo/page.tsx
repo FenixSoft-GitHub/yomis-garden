@@ -2,7 +2,44 @@ import { Suspense } from "react";
 import { getProducts } from "@/lib/hooks/useProducts";
 import ProductCard from "@/components/store/ProductCard";
 import FilterPanel from "@/components/store/FilterPanel";
-// import { Skeleton } from "@/components/ui/skeleton";
+import FilterDrawer from "@/components/store/FilterDrawer";
+import type { Metadata } from "next";
+
+const categoryNames: Record<string, string> = {
+  arboles: "Árboles frutales y ornamentales",
+  ornamentales: "Plantas ornamentales",
+  "cactus-suculentas": "Cactus y suculentas",
+  "no-ornamentales": "Plantas medicinales y aromáticas",
+  macetas: "Macetas y porrones",
+  sustratos: "Sustratos y tierra",
+  fertilizantes: "Fertilizantes y abonos",
+  herramientas: "Herramientas de jardinería",
+};
+
+export async function generateMetadata({
+  searchParams,
+}: PageProps): Promise<Metadata> {
+  const params = await searchParams;
+  const categoria = params.categoria;
+
+  const title = categoria
+    ? `${categoryNames[categoria] ?? categoria} — Yomi's Garden`
+    : "Catálogo de plantas y accesorios — Yomi's Garden";
+
+  const description = categoria
+    ? `Compra ${categoryNames[categoria] ?? categoria} en Yomi's Garden. Envíos a toda Venezuela. Plantas saludables con garantía de calidad.`
+    : "Explora nuestro catálogo completo de plantas, cactus, suculentas, árboles frutales, macetas y accesorios. Envíos a toda Venezuela.";
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "website",
+    },
+  };
+}
 
 interface PageProps {
   searchParams: Promise<{ [key: string]: string | undefined }>;
@@ -38,8 +75,8 @@ export default async function CatalogoPage({ searchParams }: PageProps) {
       </div>
 
       <div className="flex flex-col lg:flex-row gap-8">
-        {/* Filtros */}
-        <div className="lg:w-56 shrink-0">
+        {/* Filtros desktop */}
+        <div className="lg:w-56 shrink-0 hidden lg:block">
           <Suspense>
             <FilterPanel />
           </Suspense>
@@ -48,7 +85,7 @@ export default async function CatalogoPage({ searchParams }: PageProps) {
         {/* Grid de productos */}
         <div className="flex-1">
           {products.length === 0 ? (
-            <div className="text-center py-20 text-gray-400">
+            <div className="text-center py-20 text-gray-400 dark:text-gray-500">
               <p className="text-lg">
                 No se encontraron productos con esos filtros.
               </p>
@@ -65,6 +102,11 @@ export default async function CatalogoPage({ searchParams }: PageProps) {
           )}
         </div>
       </div>
+
+      {/* Filtros móvil */}
+      <Suspense>
+        <FilterDrawer />
+      </Suspense>
     </div>
   );
 }

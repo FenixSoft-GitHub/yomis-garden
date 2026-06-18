@@ -10,9 +10,11 @@ import AdminLink from "./AdminLink";
 import SearchBar from "@/components/store/SearchBar";
 import UserMenu from "@/components/layout/UserMenu";
 import ThemeToggle from "@/components/layout/ThemeToggle";
+import { useCartStore } from "@/lib/stores/cart.store";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const toggleCart = useCartStore((s) => s.toggleCart);
 
   return (
     <header className="sticky top-0 z-50 bg-white dark:bg-gray-950 border-b border-green-100 dark:border-gray-800 shadow-sm py-2">
@@ -80,12 +82,17 @@ export default function Navbar() {
             <AdminLink />
             <UserMenu />
             <ThemeToggle />
-            <Link href="/carrito" className="relative">
-              <Button variant="ghost" size="icon" className="relative">
-                <ShoppingCart className="size-5" />
-                <CartCount />
-              </Button>
-            </Link>
+
+            <Button
+              variant="ghost"
+              size="icon"
+              className="relative"
+              onClick={toggleCart}
+            >
+              <ShoppingCart className="size-5" />
+              <CartCount />
+            </Button>
+
             <Button
               variant="ghost"
               size="icon"

@@ -1,5 +1,12 @@
 import Logo from "@/components/layout/Logo";
 import AuthForm from "@/components/store/AuthForm";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Iniciar sesión — Yomi's Garden",
+  description:
+    "Accede a tu cuenta de Yomi's Garden para ver tus pedidos, favoritos y puntos de fidelización.",
+};
 
 export default function AuthPage() {
   return (

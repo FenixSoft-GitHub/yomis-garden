@@ -9,25 +9,11 @@ import type { Product } from "@/lib/types";
 import { toast } from "sonner";
 import Image from "next/image";
 import FavoriteButton from "@/components/store/FavoriteButton";
+import { LUZ_LABELS, RIEGO_LABELS } from "@/app/constants/botanicalFilters";
 
 interface ProductCardProps {
   product: Product;
 }
-
-const luzLabel: Record<string, string> = {
-  sol_directo: "☀️ Sol directo",
-  sol_parcial: "⛅ Sol parcial",
-  sombra: "🌥️ Sombra",
-  interior: "🏠 Interior",
-};
-
-const riegoLabel: Record<string, string> = {
-  diario: "💧 Diario",
-  cada_2_dias: "💧 C/2 días",
-  semanal: "💧 Semanal",
-  quincenal: "💧 Quincenal",
-  mensual: "💧 Mensual",
-};
 
 export default function ProductCard({ product }: ProductCardProps) {
   const addItem = useCartStore((s) => s.addItem);
@@ -103,13 +89,13 @@ export default function ProductCard({ product }: ProductCardProps) {
         {attr && (
           <div className="flex flex-wrap gap-1">
             {attr.light_requirement && (
-              <span className="text-xs bg-yellow-50 text-yellow-700 px-2 py-0.5 rounded-full">
-                {luzLabel[attr.light_requirement]}
+              <span className="text-xs bg-yellow-200 text-yellow-900 dark:bg-yellow-950 dark:text-yellow-400 px-2 py-0.5 rounded-full">
+                {LUZ_LABELS[attr.light_requirement] || attr.light_requirement}
               </span>
             )}
             {attr.water_frequency && (
-              <span className="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded-full">
-                {riegoLabel[attr.water_frequency]}
+              <span className="text-xs bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300 px-2 py-0.5 rounded-full">
+                {RIEGO_LABELS[attr.water_frequency] || attr.water_frequency}
               </span>
             )}
           </div>

@@ -1,6 +1,25 @@
 import { stepQuotes, projectTypes } from "@/app/constants/stepQuotes";
 import QuoteForm from "@/components/store/QuoteForm";
 import { Star } from "lucide-react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Diseño de paisajismo — Yomi's Garden",
+  description:
+    "Servicio profesional de diseño y ejecución de jardines en Venezuela. Proyectos residenciales, comerciales y corporativos. Cotiza gratis.",
+  keywords: [
+    "paisajismo Venezuela",
+    "jardines Venezuela",
+    "diseño jardines",
+    "vivero paisajismo",
+  ],
+  openGraph: {
+    title: "Diseño de paisajismo — Yomi's Garden",
+    description:
+      "Transformamos espacios en jardines únicos. Cotiza tu proyecto sin compromiso.",
+    type: "website",
+  },
+};
 
 export default function PaisajismoPage() {
   return (
@@ -36,8 +55,8 @@ export default function PaisajismoPage() {
                 key={title}
                 className={`rounded-2xl p-6 flex flex-col items-center text-center gap-3 ${color}`}
               >
-                <div className="w-12 h-12 bg-white/50 dark:bg-white/10 rounded-xl flex items-center justify-center">
-                  <Icon className="w-6 h-6" />
+                <div className="size-12 bg-white/50 dark:bg-white/10 rounded-xl flex items-center justify-center">
+                  <Icon className="size-6" />
                 </div>
                 <h3 className="font-semibold">{title}</h3>
                 <p className="text-sm opacity-75">{desc}</p>
