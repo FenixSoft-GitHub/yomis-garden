@@ -75,6 +75,12 @@ export default function Navbar() {
             >
               Paisajismo
             </Link>
+            <Link
+              href="/guias"
+              className="hover:text-green-700 dark:hover:text-green-400 transition-colors"
+            >
+              Guías
+            </Link>
           </nav>
 
           {/* Acciones */}
@@ -137,6 +143,12 @@ export default function Navbar() {
               onClick={() => setMenuOpen(false)}
             >
               Macetas
+            </Link>
+            <Link
+              href="/guias"
+              className="hover:text-green-700 dark:hover:text-green-400 transition-colors"
+            >
+              Guías
             </Link>
           </nav>
         )}

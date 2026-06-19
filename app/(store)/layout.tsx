@@ -3,6 +3,8 @@ import Footer from "@/components/layout/Footer";
 import { Toaster } from "@/components/ui/sonner";
 import CartDrawer from "@/components/store/CartDrawer";
 import WhatsAppButton from "@/components/store/WhatsAppButton";
+import OrderNotifications from "@/components/store/OrderNotifications";
+import CompareBar from "@/components/store/CompareBar";
 
 export default function StoreLayout({
   children,
@@ -17,6 +19,8 @@ export default function StoreLayout({
       <Toaster richColors position="bottom-right" />
       <CartDrawer />
       <WhatsAppButton />
+      <OrderNotifications />
+      <CompareBar />
     </div>
   );
 }

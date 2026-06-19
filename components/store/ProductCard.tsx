@@ -1,14 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { ShoppingCart, Leaf } from "lucide-react";
+import { ShoppingCart, Leaf, Scale } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useCartStore } from "@/lib/stores/cart.store";
 import type { Product } from "@/lib/types";
 import { toast } from "sonner";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 import FavoriteButton from "@/components/store/FavoriteButton";
+import { useCompareStore } from "@/lib/stores/compare.store";
 import { LUZ_LABELS, RIEGO_LABELS } from "@/app/constants/botanicalFilters";
 
 interface ProductCardProps {
@@ -16,7 +18,25 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
+  const { addProduct, removeProduct, isInCompare } = useCompareStore();
+  const inCompare = isInCompare(product.id);
   const addItem = useCartStore((s) => s.addItem);
+
+  const handleToggleCompare = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (inCompare) {
+      removeProduct(product.id);
+      toast.info("Eliminado del comparador");
+    } else {
+      if (useCompareStore.getState().products.length >= 3) {
+        toast.error("Máximo 3 productos para comparar");
+        return;
+      }
+      addProduct(product);
+      toast.success("Agregado al comparador");
+    }
+  };
 
   const handleAddToCart = () => {
     addItem(product);
@@ -40,6 +60,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             alt={product.name}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            loading="eager"
             className="object-cover group-hover:scale-105 transition-transform duration-300"
           />
         ) : (
@@ -67,8 +88,23 @@ export default function ProductCard({ product }: ProductCardProps) {
             </Badge>
           )}
         </div>
-        <div className="absolute top-3 right-3">
+        {/* <div className="absolute top-3 right-3">
           <FavoriteButton productId={product.id} size="sm" />
+        </div> */}
+        <div className="absolute top-3 right-3 flex flex-col gap-2">
+          <FavoriteButton productId={product.id} size="sm" />
+          <button
+            onClick={handleToggleCompare}
+            className={cn(
+              "size-8 rounded-full flex items-center justify-center transition-all duration-200",
+              inCompare
+                ? "bg-blue-500 text-white"
+                : "bg-white/80 dark:bg-gray-800/80 text-gray-400 hover:text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-950/30",
+            )}
+            title={inCompare ? "Quitar de comparar" : "Agregar a comparar"}
+          >
+            <Scale className="size-4" />
+          </button>
         </div>
       </Link>
 

@@ -12,6 +12,7 @@ import {
   ExternalLink,
   MessageSquare,
   TreePine,
+  BookOpen,
 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
@@ -23,6 +24,7 @@ const navItems = [
   { href: "/admin/productos", icon: Package, label: "Productos" },
   { href: "/admin/resenas", icon: MessageSquare, label: "Reseñas" },
   { href: "/admin/paisajismo", icon: TreePine, label: "Paisajismo" },
+  { href: "/admin/blog", icon: BookOpen, label: "Guías" },
   { href: "/admin/reportes", icon: BarChart3, label: "Reportes" },
   { href: "/admin/configuracion", icon: Settings, label: "Configuración" },
 ];

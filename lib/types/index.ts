@@ -215,3 +215,21 @@ export interface LoyaltyTransaction {
   order_id: string | null;
   created_at: string;
 }
+
+export type BlogCategory = "cuidados" | "paisajismo" | "consejos" | "noticias";
+
+export interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string | null;
+  content: string;
+  cover_image: string | null;
+  category: BlogCategory;
+  tags: string[];
+  author_name: string;
+  is_published: boolean;
+  views: number;
+  created_at: string;
+  updated_at: string;
+}

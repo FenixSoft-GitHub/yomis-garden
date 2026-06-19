@@ -279,16 +279,6 @@ export default function ProductForm({
                   </option>
                 ))}
               </select>
-              {/* <select
-                {...register("light_requirement")}
-                className="mt-1 w-full bg-gray-800 border border-gray-700 text-white px-3 py-2 text-sm rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-              >
-                <option value="">Sin especificar</option>
-                <option value="sol_directo">☀️ Sol directo</option>
-                <option value="sol_parcial">⛅ Sol parcial</option>
-                <option value="sombra">🌥️ Sombra</option>
-                <option value="interior">🏠 Interior</option>
-              </select> */}
             </div>
             <div>
               <Label className="text-gray-300">Frecuencia de riego</Label>
@@ -303,17 +293,6 @@ export default function ProductForm({
                   </option>
                 ))}
               </select>
-              {/* <select
-                {...register("water_frequency")}
-                className="mt-1 w-full bg-gray-800 border border-gray-700 text-white px-3 py-2 text-sm rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-              >
-                <option value="">Seleccionar riego...</option>
-                <option value="diario">💧 Diario</option>
-                <option value="cada_2_dias">💧 Cada 2 días</option>
-                <option value="semanal">💧 Semanal</option>
-                <option value="quincenal">💧 Quincenal</option>
-                <option value="mensual">💧 Mensual</option>
-              </select> */}
             </div>
             <div>
               <Label className="text-gray-300">Dificultad</Label>
@@ -328,15 +307,6 @@ export default function ProductForm({
                   </option>
                 ))}
               </select>
-              {/* <select
-                {...register("care_difficulty")}
-                className="mt-1 w-full bg-gray-800 border border-gray-700 text-white px-3 py-2 text-sm rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-              >
-                <option value="">Sin especificar</option>
-                <option value="facil">🟢 Fácil</option>
-                <option value="moderado">🟡 Moderado</option>
-                <option value="experto">🔴 Experto</option>
-              </select> */}
             </div>
           </div>
           <div className="flex flex-wrap gap-4 mt-4">

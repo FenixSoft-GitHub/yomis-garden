@@ -7,7 +7,6 @@ import { Badge } from "@/components/ui/badge";
 import { useCartStore } from "@/lib/stores/cart.store";
 import type { Product, ProductVariant } from "@/lib/types";
 import { toast } from "sonner";
-import Image from "next/image";
 import {
   ShoppingCart,
   Leaf,
@@ -21,7 +20,6 @@ import {
   PawPrint,
 } from "lucide-react";
 import FavoriteButton from "./FavoriteButton";
-import ReviewList from "./ReviewList";
 import ImageZoom from "./ImageZoom";
 import ShareButtons from "./ShareButtons";
 import {
@@ -40,8 +38,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
     ProductVariant | undefined
   >(product.product_variants?.[0]);
   const addItem = useCartStore((s) => s.addItem);
-  const [activeImage, setActiveImage] = useState(0);
-
+  
   const attr = product.plant_attributes;
   const variants = product.product_variants ?? [];
   const images = product.images?.length ? product.images : [];
@@ -282,10 +279,6 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           </div>
         </div>
       </div>
-      {/* Reseñas */}
-      {/* <div className="mt-16 border-t border-gray-100 dark:border-gray-800 pt-12">
-        <ReviewList productId={product.id} />
-      </div> */}
     </div>
   );
 }

@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react";
 import { Leaf, ZoomIn } from "lucide-react";
+import Image from "next/image"; 
 
 interface ImageZoomProps {
   images: string[];
@@ -22,6 +23,8 @@ export default function ImageZoom({ images, productName }: ImageZoomProps) {
     setPosition({ x, y });
   };
 
+  const currentImageUrl = images[activeImage];
+
   return (
     <div className="flex flex-col gap-4">
       {/* Imagen principal con zoom */}
@@ -32,12 +35,16 @@ export default function ImageZoom({ images, productName }: ImageZoomProps) {
         onMouseLeave={() => setZoom(false)}
         onMouseMove={handleMouseMove}
       >
-        {images.length > 0 ? (
+        {currentImageUrl ? (
           <>
-            <img
-              src={images[activeImage]}
-              alt={productName}
-              className={`w-full h-full object-cover transition-transform duration-200 ${
+            {/* ✨ Refactorizado a <Image /> con 'fill' por el contenedor aspect-square */}
+            <Image
+              src={currentImageUrl}
+              alt={`Imagen principal de ${productName}`}
+              fill
+              priority // Le da prioridad de carga (LCP) a la imagen principal del producto
+              sizes="(max-w-768px) 100vw, 50vw" // Optimiza la resolución según el dispositivo
+              className={`object-cover transition-transform duration-200 ${
                 zoom ? "scale-150" : "scale-100"
               }`}
               style={
@@ -48,7 +55,7 @@ export default function ImageZoom({ images, productName }: ImageZoomProps) {
               draggable={false}
             />
             {!zoom && (
-              <div className="absolute bottom-3 right-3 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm rounded-lg p-1.5 text-gray-500 dark:text-gray-400">
+              <div className="absolute bottom-3 right-3 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm rounded-lg p-1.5 text-gray-500 dark:text-gray-400 z-10">
                 <ZoomIn className="w-4 h-4" />
               </div>
             )}
@@ -73,10 +80,14 @@ export default function ImageZoom({ images, productName }: ImageZoomProps) {
                   : "border-transparent opacity-70 hover:opacity-100 hover:border-green-300"
               }`}
             >
-              <img
+              {/* ✨ Refactorizado a <Image /> con width y height fijos (w-20 = 80px) */}
+              <Image
                 src={img}
-                alt={`${productName} ${i + 1}`}
+                alt={`Miniatura ${i + 1} de ${productName}`}
+                width={80}
+                height={80}
                 className="w-full h-full object-cover"
+                draggable={false}
               />
             </button>
           ))}
