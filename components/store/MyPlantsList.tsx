@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import {
   Plus,
@@ -134,7 +134,7 @@ export default function MyPlantsList({
 
   const getDaysUntil = (date: string) => {
     const diff = new Date(date).getTime() - now;
-    return Math.ceil(diff / (1000 * 60 * 60 * 24));
+    return Math.round(diff / (1000 * 60 * 60 * 24));
   };
   
   return (
