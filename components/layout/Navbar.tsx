@@ -11,6 +11,7 @@ import SearchBar from "@/components/store/SearchBar";
 import UserMenu from "@/components/layout/UserMenu";
 import ThemeToggle from "@/components/layout/ThemeToggle";
 import { useCartStore } from "@/lib/stores/cart.store";
+import CategoriesDropdown from "@/components/layout/CategoriesDropdown";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -32,11 +33,6 @@ export default function Navbar() {
             </span>
           </Link>
 
-          {/* Search Bar */}
-          <div className="flex-1 max-w-xs hidden md:block">
-            <SearchBar />
-          </div>
-
           {/* Nav desktop */}
           <nav className="hidden lg:flex items-center gap-5 text-sm font-medium text-gray-600 dark:text-gray-400">
             <Link
@@ -45,7 +41,8 @@ export default function Navbar() {
             >
               Catálogo
             </Link>
-            <Link
+            <CategoriesDropdown />
+            {/* <Link
               href="/catalogo?categoria=arboles"
               className="hover:text-green-700 dark:hover:text-green-400 transition-colors"
             >
@@ -68,7 +65,7 @@ export default function Navbar() {
               className="hover:text-green-700 dark:hover:text-green-400 transition-colors"
             >
               Macetas
-            </Link>
+            </Link> */}
             <Link
               href="/paisajismo"
               className="hover:text-green-700 dark:hover:text-green-400 transition-colors"
@@ -81,7 +78,18 @@ export default function Navbar() {
             >
               Guías
             </Link>
+            <Link
+              href="/calculadora-sustrato"
+              className="hover:text-green-700 dark:hover:text-green-400 transition-colors"
+            >
+              Calculadora
+            </Link>
           </nav>
+
+          {/* Search Bar */}
+          <div className="flex-1 max-w-xs hidden md:block">
+            <SearchBar />
+          </div>
 
           {/* Acciones */}
           <div className="flex items-center gap-4 shrink-0">
@@ -114,9 +122,14 @@ export default function Navbar() {
           </div>
         </div>
 
+        {/* Búsqueda móvil */}
+        <div className="md:hidden py-3">
+          <SearchBar />
+        </div>
+
         {/* Nav mobile */}
         {menuOpen && (
-          <nav className="md:hidden py-4 border-t border-green-100 dark:border-gray-800 flex flex-col gap-3 text-sm font-medium text-gray-600 dark:text-gray-400">
+          <nav className="lg:hidden py-4 border-t border-green-100 dark:border-gray-800 flex flex-col gap-3 text-sm font-medium text-gray-600 dark:text-gray-400">
             <Link href="/catalogo" onClick={() => setMenuOpen(false)}>
               Catálogo
             </Link>
@@ -144,11 +157,17 @@ export default function Navbar() {
             >
               Macetas
             </Link>
+            <Link href="/paisajismo" onClick={() => setMenuOpen(false)}>
+              Paisajismo
+            </Link>
+            <Link href="/guias" onClick={() => setMenuOpen(false)}>
+              Guías de cuidado
+            </Link>
             <Link
-              href="/guias"
-              className="hover:text-green-700 dark:hover:text-green-400 transition-colors"
+              href="/calculadora-sustrato"
+              onClick={() => setMenuOpen(false)}
             >
-              Guías
+              Calculadora de sustrato
             </Link>
           </nav>
         )}

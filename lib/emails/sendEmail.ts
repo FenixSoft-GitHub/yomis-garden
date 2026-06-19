@@ -2,6 +2,25 @@ import { Resend } from "resend";
 import { OrderConfirmationEmail } from "./OrderConfirmation";
 import { OrderStatusUpdateEmail } from "./OrderStatusUpdate";
 import * as React from "react";
+import { WateringReminderEmail } from "./WateringReminder";
+
+export async function sendWateringReminder(params: {
+  to: string;
+  customerName: string;
+  plants: { nickname: string; productName?: string }[];
+}) {
+  try {
+    const resend = getResend();
+    await resend.emails.send({
+      from: getFrom(),
+      to: getTo(params.to),
+      subject: `💧 Tus plantas necesitan agua hoy — Yomi's Garden`,
+      react: React.createElement(WateringReminderEmail, params),
+    });
+  } catch (error) {
+    console.error("Error sending watering reminder:", error);
+  }
+}
 
 function getResend() {
   const apiKey = process.env.RESEND_API_KEY;

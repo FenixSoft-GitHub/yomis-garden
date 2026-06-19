@@ -233,3 +233,17 @@ export interface BlogPost {
   created_at: string;
   updated_at: string;
 }
+
+export interface UserPlant {
+  id: string;
+  user_id: string;
+  product_id: string | null;
+  nickname: string;
+  water_frequency: string;
+  last_watered: string;
+  next_watering: string;
+  reminders_enabled: boolean;
+  notes: string | null;
+  created_at: string;
+  product?: { name: string; images: string[] };
+}

@@ -26,36 +26,3 @@ export default function Logo({ className = "" }: LogoProps) {
     </div>
   );
 }
-
-// import Image from "next/image";
-
-// interface LogoProps {
-//   width?: number;
-//   height?: number;
-//   className?: string;
-// }
-
-// export default function Logo({
-//   width = 64,
-//   height = 64,
-//   className = "",
-// }: LogoProps) {
-//   const hasWidthClass = className.includes("w-");
-//   const hasHeightClass = className.includes("h-");
-
-//   let autoRatioClass = "";
-//   if (hasWidthClass && !hasHeightClass) autoRatioClass = "h-auto";
-//   if (hasHeightClass && !hasWidthClass) autoRatioClass = "w-auto";
-
-//   return (
-//     <Image
-//       src="/LogoYomisGarden.webp"
-//       alt="Yomi's Garden"
-//       width={width}
-//       height={height}
-//       // Fijar ambos en "auto" en el objeto inline silencia la advertencia del navegador
-//       style={{ width: "auto", height: "auto" }}
-//       className={`${autoRatioClass} ${className} rounded-full animate-pulse`.trim()}
-//     />
-//   );
-// }

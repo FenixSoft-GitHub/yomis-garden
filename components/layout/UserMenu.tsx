@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { User, LogOut, Package, Heart, Award } from "lucide-react";
+import { User, LogOut, Package, Heart, Award, Calendar } from "lucide-react";
 import type { User as SupabaseUser } from "@supabase/supabase-js";
 
 export default function UserMenu() {
@@ -105,6 +105,15 @@ export default function UserMenu() {
             >
               <Heart className="size-4" />
               Mis favoritos
+            </Link>
+
+            <Link
+              href="/mis-plantas"
+              onClick={() => setOpen(false)}
+              className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-950/30 hover:text-blue-700 dark:hover:text-blue-400 transition-colors"
+            >
+              <Calendar className="size-4" />
+              Mis plantas y riego
             </Link>
 
             <button
