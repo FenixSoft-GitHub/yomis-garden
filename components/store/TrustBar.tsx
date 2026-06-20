@@ -17,7 +17,7 @@ export default function TrustBar() {
               key={label}
               className="flex items-center gap-3 justify-center md:justify-start"
             >
-              <Icon className={`w-5 h-5 shrink-0 ${color}`} />
+              <Icon className={`size-5 shrink-0 ${color}`} />
               <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                 {label}
               </span>

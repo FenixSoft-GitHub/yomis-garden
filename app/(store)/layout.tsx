@@ -5,6 +5,7 @@ import CartDrawer from "@/components/store/CartDrawer";
 import WhatsAppButton from "@/components/store/WhatsAppButton";
 import OrderNotifications from "@/components/store/OrderNotifications";
 import CompareBar from "@/components/store/CompareBar";
+import MobileBottomNav from "@/components/layout/MobileBottomNav";
 
 export default function StoreLayout({
   children,
@@ -14,13 +15,14 @@ export default function StoreLayout({
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="flex-1">{children}</main>
+      <main className="flex-1 pb-24 lg:pb-0">{children}</main>
       <Footer />
       <Toaster richColors position="bottom-right" />
       <CartDrawer />
       <WhatsAppButton />
       <OrderNotifications />
       <CompareBar />
+      <MobileBottomNav />
     </div>
   );
 }

@@ -42,30 +42,6 @@ export default function Navbar() {
               Catálogo
             </Link>
             <CategoriesDropdown />
-            {/* <Link
-              href="/catalogo?categoria=arboles"
-              className="hover:text-green-700 dark:hover:text-green-400 transition-colors"
-            >
-              Árboles
-            </Link>
-            <Link
-              href="/catalogo?categoria=ornamentales"
-              className="hover:text-green-700 dark:hover:text-green-400 transition-colors"
-            >
-              Ornamentales
-            </Link>
-            <Link
-              href="/catalogo?categoria=cactus-suculentas"
-              className="hover:text-green-700 dark:hover:text-green-400 transition-colors"
-            >
-              Cactus
-            </Link>
-            <Link
-              href="/catalogo?categoria=macetas"
-              className="hover:text-green-700 dark:hover:text-green-400 transition-colors"
-            >
-              Macetas
-            </Link> */}
             <Link
               href="/paisajismo"
               className="hover:text-green-700 dark:hover:text-green-400 transition-colors"
@@ -100,7 +76,7 @@ export default function Navbar() {
             <Button
               variant="ghost"
               size="icon"
-              className="relative"
+              className="relative hidden lg:flex"
               onClick={toggleCart}
             >
               <ShoppingCart className="size-5" />
@@ -133,7 +109,8 @@ export default function Navbar() {
             <Link href="/catalogo" onClick={() => setMenuOpen(false)}>
               Catálogo
             </Link>
-            <Link
+            <CategoriesDropdown />
+            {/* <Link
               href="/catalogo?categoria=arboles"
               onClick={() => setMenuOpen(false)}
             >
@@ -156,7 +133,7 @@ export default function Navbar() {
               onClick={() => setMenuOpen(false)}
             >
               Macetas
-            </Link>
+            </Link> */}
             <Link href="/paisajismo" onClick={() => setMenuOpen(false)}>
               Paisajismo
             </Link>

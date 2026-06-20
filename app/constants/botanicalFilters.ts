@@ -19,7 +19,7 @@ export const RIEGO_LABELS: Record<string, string> = {
 export const DIFICULTAD_LABELS: Record<string, string> = {
   facil: "🟢 Fácil",
   moderado: "🟡 Moderado",
-  experto: "🔴 Experto",
+  experto: "🔴 Experto", 
 };
 
 // 2. Estructuras de opciones para Componentes Interactivos (FilterDrawer, ProductForm, etc.)

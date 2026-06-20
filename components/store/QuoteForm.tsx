@@ -11,32 +11,37 @@ import { Loader2, CheckCircle } from "lucide-react";
 import { toast } from "sonner";
 import { quoteSchema, type QuoteFormData } from "@/lib/schemas/quote.schema";
 import { createClient } from "@/lib/supabase/client";
+import {
+  projectTypes,
+  budgetOptions,
+  plantOptions,
+} from "@/app/constants/quoteStatus";
 
-const projectTypes = [
-  { value: "residencial", label: "🏡 Residencial" },
-  { value: "comercial", label: "🏢 Comercial" },
-  { value: "corporativo", label: "🌳 Corporativo" },
-  { value: "evento", label: "🎉 Evento" },
-];
+// const projectTypes = [
+//   { value: "residencial", label: "🏡 Residencial" },
+//   { value: "comercial", label: "🏢 Comercial" },
+//   { value: "corporativo", label: "🌳 Corporativo" },
+//   { value: "evento", label: "🎉 Evento" },
+// ];
 
-const budgetOptions = [
-  "Menos de $500",
-  "$500 - $1,000",
-  "$1,000 - $3,000",
-  "$3,000 - $5,000",
-  "Más de $5,000",
-  "Por definir",
-];
+// const budgetOptions = [
+//   "Menos de $500",
+//   "$500 - $1,000",
+//   "$1,000 - $3,000",
+//   "$3,000 - $5,000",
+//   "Más de $5,000",
+//   "Por definir",
+// ];
 
-const plantOptions = [
-  "Plantas tropicales",
-  "Cactus y suculentas",
-  "Árboles frutales",
-  "Plantas de sombra",
-  "Plantas con flores",
-  "Follaje decorativo",
-  "Sin preferencia",
-];
+// const plantOptions = [
+//   "Plantas tropicales",
+//   "Cactus y suculentas",
+//   "Árboles frutales",
+//   "Plantas de sombra",
+//   "Plantas con flores",
+//   "Follaje decorativo",
+//   "Sin preferencia",
+// ];
 
 export default function QuoteForm() {
   const [submitted, setSubmitted] = useState(false);

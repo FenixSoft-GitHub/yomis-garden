@@ -17,14 +17,7 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import type { UserPlant } from "@/lib/types";
 import Image from "next/image";
-
-const riegoLabel: Record<string, string> = {
-  diario: "💧 Diario",
-  cada_2_dias: "💧 Cada 2 días",
-  semanal: "💧 Semanal",
-  quincenal: "💧 Quincenal",
-  mensual: "💧 Mensual",
-};
+import { RIEGO_LABELS } from "@/app/constants/botanicalFilters";
 
 interface MyPlantsListProps {
   initialPlants: UserPlant[];
@@ -145,7 +138,7 @@ export default function MyPlantsList({
           onClick={() => setShowForm(true)}
           className="bg-green-600 hover:bg-green-700 text-white gap-2 self-start"
         >
-          <Plus className="w-4 h-4" />
+          <Plus className="size-4" />
           Agregar planta
         </Button>
       )}
@@ -206,7 +199,7 @@ export default function MyPlantsList({
               }
               className="mt-1 w-full border border-input bg-background px-3 py-2 text-sm rounded-md dark:bg-gray-800 dark:border-gray-700"
             >
-              {Object.entries(riegoLabel).map(([key, label]) => (
+              {Object.entries(RIEGO_LABELS).map(([key, label]) => (
                 <option key={key} value={key}>
                   {label}
                 </option>
@@ -236,7 +229,7 @@ export default function MyPlantsList({
       {/* Lista de plantas */}
       {plants.length === 0 ? (
         <div className="text-center py-16">
-          <Leaf className="w-12 h-12 text-gray-200 dark:text-gray-700 mx-auto mb-4" />
+          <Leaf className="size-12 text-gray-200 dark:text-gray-700 mx-auto mb-4" />
           <p className="text-gray-400 dark:text-gray-500">
             Aún no tienes plantas en tu colección
           </p>
@@ -251,7 +244,7 @@ export default function MyPlantsList({
             return (
               <div
                 key={plant.id}
-                className={`bg-white dark:bg-gray-900 rounded-2xl border p-5 ${
+                className={`bg-green-50 dark:bg-gray-950 rounded-2xl border p-5 ${
                   isOverdue
                     ? "border-red-200 dark:border-red-900"
                     : isToday
@@ -261,17 +254,17 @@ export default function MyPlantsList({
               >
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex items-center gap-3">
-                    <div className="relative w-10 h-10 bg-green-50 dark:bg-green-950/30 rounded-xl overflow-hidden flex items-center justify-center shrink-0">
+                    <div className="relative size-10 bg-green-50 dark:bg-green-950/30 rounded-xl overflow-hidden flex items-center justify-center shrink-0">
                       {plant.product?.images?.[0] ? (
                         <Image
                           src={plant.product.images[0]}
-                          alt={plant.product.name || "Miniatura de la planta"} 
+                          alt={plant.product.name || "Miniatura de la planta"}
                           fill
-                          sizes="40px" 
+                          sizes="40px"
                           className="object-cover"
                         />
                       ) : (
-                        <Leaf className="w-5 h-5 text-green-400" />
+                        <Leaf className="size-5 text-green-400" />
                       )}
                     </div>
                     <div>
@@ -287,12 +280,12 @@ export default function MyPlantsList({
                     onClick={() => deletePlant(plant.id)}
                     className="text-gray-300 dark:text-gray-600 hover:text-red-500 transition-colors"
                   >
-                    <Trash2 className="w-4 h-4" />
+                    <Trash2 className="size-4" />
                   </button>
                 </div>
 
                 <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400 mb-3">
-                  <Calendar className="w-3 h-3" />
+                  <Calendar className="size-3" />
                   {isOverdue ? (
                     <span className="text-red-500 font-medium">
                       Riego atrasado {Math.abs(daysUntil)} días
@@ -304,7 +297,7 @@ export default function MyPlantsList({
                   ) : (
                     <span>Próximo riego en {daysUntil} días</span>
                   )}
-                  <span>· {riegoLabel[plant.water_frequency]}</span>
+                  <span>· {RIEGO_LABELS[plant.water_frequency]}</span>
                 </div>
 
                 <div className="flex items-center gap-2">
@@ -313,7 +306,7 @@ export default function MyPlantsList({
                     onClick={() => markWatered(plant.id)}
                     className="bg-blue-500 hover:bg-blue-600 text-white gap-1.5 text-xs flex-1"
                   >
-                    <Droplets className="w-3 h-3" />
+                    <Droplets className="size-3" />
                     Ya la regué
                   </Button>
                   <button
@@ -332,9 +325,9 @@ export default function MyPlantsList({
                     }
                   >
                     {plant.reminders_enabled ? (
-                      <Bell className="w-4 h-4" />
+                      <Bell className="size-4" />
                     ) : (
-                      <BellOff className="w-4 h-4" />
+                      <BellOff className="size-4" />
                     )}
                   </button>
                 </div>

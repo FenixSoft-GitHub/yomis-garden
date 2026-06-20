@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { MessageCircle, X, ShoppingCart, HelpCircle, Leaf } from "lucide-react";
+import { X, ShoppingCart, HelpCircle, Leaf } from "lucide-react";
 import { WhatsAppSVG } from "./WhatsAppSVG";
 
 const WHATSAPP_NUMBER = "+584124998811"; // ← Cambia por tu número real (sin + ni espacios)
@@ -36,7 +36,7 @@ export default function WhatsAppButton() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+    <div className="fixed bottom-24 right-4 lg:bottom-6 lg:right-6 z-40 flex flex-col items-end gap-3">
       {/* Mensajes rápidos */}
       {open && (
         <div className="flex flex-col gap-2 mb-1">
@@ -89,11 +89,7 @@ export default function WhatsAppButton() {
         }`}
         aria-label={open ? "Cerrar WhatsApp" : "Abrir WhatsApp"}
       >
-        {open ? (
-          <X className="size-6 text-white" />
-        ) : (
-          <WhatsAppSVG />
-        )}
+        {open ? <X className="size-6 text-white" /> : <WhatsAppSVG />}
       </button>
 
       {/* Pulse animado cuando está cerrado */}

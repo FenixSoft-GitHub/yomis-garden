@@ -31,5 +31,31 @@ export const projectTypeLabel: Record<string, string> = {
   residencial: "🏡 Residencial",
   comercial: "🏢 Comercial",
   corporativo: "🌳 Corporativo",
-  evento: "🎉 Evento",
+  evento: "🎉 Evento", 
 };
+
+export const projectTypes = [
+  { value: "residencial", label: projectTypeLabel.residencial },
+  { value: "comercial", label: projectTypeLabel.comercial },
+  { value: "corporativo", label: projectTypeLabel.corporativo },
+  { value: "evento", label: projectTypeLabel.evento },
+];
+
+export const budgetOptions = [
+  "Menos de $500",
+  "$500 - $1,000",
+  "$1,000 - $3,000",
+  "$3,000 - $5,000",
+  "Más de $5,000",
+  "Por definir",
+];
+
+export const plantOptions = [
+  "Plantas tropicales",
+  "Cactus y suculentas",
+  "Árboles frutales",
+  "Plantas de sombra",
+  "Plantas con flores",
+  "Follaje decorativo",
+  "Sin preferencia",
+];
