@@ -51,6 +51,7 @@ export default function ProductForm({
       light_requirement: initialData?.light_requirement ?? "",
       water_frequency: initialData?.water_frequency ?? "",
       care_difficulty: initialData?.care_difficulty ?? "",
+      mature_height_cm: initialData?.mature_height_cm ?? undefined,
     },
   });
 
@@ -265,7 +266,7 @@ export default function ProductForm({
           <h2 className="font-semibold text-white mb-5">
             🌿 Atributos botánicos
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
               <Label className="text-gray-300">Luz requerida</Label>
               <select
@@ -307,6 +308,19 @@ export default function ProductForm({
                   </option>
                 ))}
               </select>
+            </div>
+            <div>
+              <Label className="text-gray-300">Altura adulta (cm)</Label>
+              <Input
+                type="number"
+                min="0"
+                placeholder="Ej: 200"
+                className="mt-1 bg-gray-800 border-gray-700 text-white"
+                {...register("mature_height_cm", {
+                  setValueAs: (v) =>
+                    v === "" || v === null ? undefined : parseFloat(v),
+                })}
+              />
             </div>
           </div>
           <div className="flex flex-wrap gap-4 mt-4">

@@ -142,7 +142,7 @@ export default function ReviewsAdmin({
                   className="text-yellow-400 hover:text-yellow-300 transition-colors p-1"
                   title="Rechazar"
                 >
-                  <XCircle className="w-5 h-5" />
+                  <XCircle className="size-5" />
                 </button>
               )}
               <button
@@ -151,7 +151,7 @@ export default function ReviewsAdmin({
                 className="text-gray-600 hover:text-red-400 transition-colors p-1"
                 title="Eliminar"
               >
-                <Trash2 className="w-4 h-4" />
+                <Trash2 className="size-4" />
               </button>
             </div>
           </div>

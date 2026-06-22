@@ -108,9 +108,9 @@ export default function BlogPostsTable({
                   }`}
                 >
                   {post.is_published ? (
-                    <Eye className="w-3 h-3" />
+                    <Eye className="size-3" />
                   ) : (
-                    <EyeOff className="w-3 h-3" />
+                    <EyeOff className="size-3" />
                   )}
                   {post.is_published ? "Publicado" : "Borrador"}
                 </button>
@@ -121,13 +121,13 @@ export default function BlogPostsTable({
                     href={`/admin/blog/${post.id}/editar`}
                     className="text-gray-400 hover:text-white"
                   >
-                    <Pencil className="w-4 h-4" />
+                    <Pencil className="size-4" />
                   </Link>
                   <button
                     onClick={() => deletePost(post.id)}
                     className="text-gray-400 hover:text-red-400"
                   >
-                    <Trash2 className="w-4 h-4" />
+                    <Trash2 className="size-4" />
                   </button>
                 </div>
               </td>

@@ -26,6 +26,7 @@ export interface ProductFormProps {
     is_outdoor: boolean;
     care_difficulty: string;
     images: string[];
+    mature_height_cm: number;
   }>;
 }
 

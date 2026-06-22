@@ -57,6 +57,7 @@ export async function POST(request: Request) {
       is_indoor: data.is_indoor,
       is_outdoor: data.is_outdoor,
       care_difficulty: data.care_difficulty || null,
+      mature_height_cm: data.mature_height_cm || null,
     });
   }
 
@@ -104,6 +105,7 @@ export async function PUT(request: Request) {
         is_indoor: data.is_indoor,
         is_outdoor: data.is_outdoor,
         care_difficulty: data.care_difficulty || null,
+        mature_height_cm: data.mature_height_cm || null,
       },
       { onConflict: "product_id" },
     );

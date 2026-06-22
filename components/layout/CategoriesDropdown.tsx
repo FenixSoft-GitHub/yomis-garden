@@ -59,7 +59,7 @@ export default function CategoriesDropdown() {
       >
         Categorías
         <ChevronDown
-          className={`w-3.5 h-3.5 transition-transform ${open ? "rotate-180" : ""}`}
+          className={`size-3.5 transition-transform ${open ? "rotate-180" : ""}`}
         />
       </button>
 
@@ -73,8 +73,8 @@ export default function CategoriesDropdown() {
                 onClick={() => setOpen(false)}
                 className="flex items-center gap-3 px-4 py-3 hover:bg-green-50 dark:hover:bg-green-950/30 transition-colors group"
               >
-                <div className="w-9 h-9 bg-green-50 dark:bg-green-950/50 rounded-xl flex items-center justify-center shrink-0 group-hover:bg-green-100 dark:group-hover:bg-green-900 transition-colors">
-                  <Icon className="w-4 h-4 text-green-600 dark:text-green-400" />
+                <div className="size-9 bg-green-50 dark:bg-green-950/50 rounded-xl flex items-center justify-center shrink-0 group-hover:bg-green-100 dark:group-hover:bg-green-900 transition-colors">
+                  <Icon className="size-4 text-green-600 dark:text-green-400" />
                 </div>
                 <div>
                   <p className="text-sm font-medium text-gray-900 dark:text-white">

@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import { createAdminClient } from "@/lib/supabase/admin";
-import { ChevronDown, Eye } from "lucide-react";
+// import { createAdminClient } from "@/lib/supabase/admin";
+import { ChevronDown } from "lucide-react";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import type { Order } from "@/lib/types";
 import { OrderItemRow } from "@/lib/types/admin";
 
@@ -56,7 +56,7 @@ interface OrdersTableProps {
 export default function OrdersTable({
   orders: initialOrders,
 }: OrdersTableProps) {
-  const router = useRouter();
+  // const router = useRouter();
   const [orders, setOrders] = useState(initialOrders);
   const [expandedOrder, setExpandedOrder] = useState<string | null>(null);
   const [updating, setUpdating] = useState<string | null>(null);

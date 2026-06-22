@@ -66,7 +66,7 @@ export default function AdminSidebar() {
                   : "text-gray-400 hover:text-white hover:bg-gray-800"
               }`}
             >
-              <Icon className="w-4 h-4" />
+              <Icon className="size-4" />
               {label}
             </Link>
           );
@@ -78,7 +78,7 @@ export default function AdminSidebar() {
           href="/"
           className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-400 hover:text-green-400 hover:bg-gray-800 transition-colors w-full"
         >
-          <ExternalLink className="w-4 h-4" />
+          <ExternalLink className="size-4" />
           Ver tienda
         </Link>
       </div>
@@ -89,7 +89,7 @@ export default function AdminSidebar() {
           onClick={handleLogout}
           className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-400 hover:text-red-400 hover:bg-gray-800 transition-colors w-full"
         >
-          <LogOut className="w-4 h-4" />
+          <LogOut className="size-4" />
           Cerrar sesión
         </button>
       </div>

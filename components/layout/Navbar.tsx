@@ -110,30 +110,6 @@ export default function Navbar() {
               Catálogo
             </Link>
             <CategoriesDropdown />
-            {/* <Link
-              href="/catalogo?categoria=arboles"
-              onClick={() => setMenuOpen(false)}
-            >
-              Árboles
-            </Link>
-            <Link
-              href="/catalogo?categoria=ornamentales"
-              onClick={() => setMenuOpen(false)}
-            >
-              Ornamentales
-            </Link>
-            <Link
-              href="/catalogo?categoria=cactus-suculentas"
-              onClick={() => setMenuOpen(false)}
-            >
-              Cactus
-            </Link>
-            <Link
-              href="/catalogo?categoria=macetas"
-              onClick={() => setMenuOpen(false)}
-            >
-              Macetas
-            </Link> */}
             <Link href="/paisajismo" onClick={() => setMenuOpen(false)}>
               Paisajismo
             </Link>

@@ -21,7 +21,7 @@ export default function HomeBentoGrid() {
         </div>
 
         {/* Estructura del Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[auto]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-auto">
           {/* TARJETA 1 (Grande - 2 Columnas de ancho): El Asistente Interactivo */}
           <div className="md:col-span-2 bg-white dark:bg-gray-900/60 rounded-3xl border border-gray-200/80 dark:border-gray-800/80 p-6 md:p-8 shadow-xs flex flex-col justify-between group relative overflow-hidden">
             {/* Sutil brillo de fondo */}
@@ -34,17 +34,17 @@ export default function HomeBentoGrid() {
           </div>
 
           {/* TARJETA 2 (Alta - 1 Columna de ancho): Producto / Categoría Destacada */}
-          <div className="bg-green-900 dark:bg-emerald-950/40 rounded-3xl overflow-hidden shadow-lg relative h-[400px] md:h-auto flex flex-col justify-end p-8 group border border-green-800/30">
+          <div className="bg-green-900 dark:bg-emerald-950/40 rounded-3xl overflow-hidden shadow-lg relative h-100 md:h-auto flex flex-col justify-end p-8 group border border-green-800/30">
             {/* Imagen de fondo premium de Cactus/Suculentas */}
             <div className="absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-105">
               <Image
-                src="/images/bento-featured.jpg" // Coloca una foto vertical impactante en public/images/
+                src="/images/bento-featured.jpg" 
                 alt="Colección de Cactus y Suculentas selectas"
                 fill
                 sizes="(max-w-768px) 100vw, 33vw"
                 className="object-cover opacity-80 md:opacity-75 group-hover:opacity-90 transition-opacity"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-green-950 via-green-950/40 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-green-950 via-green-950/40 to-transparent" />
             </div>
 
             {/* Contenido de la Tarjeta */}

@@ -10,7 +10,7 @@ export default function HeroCarousel() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % carouselImages.length);
-    }, 5000); // Cambia de imagen cada 5 segundos
+    }, 5000); 
 
     return () => clearInterval(timer);
   }, []);
@@ -30,11 +30,11 @@ export default function HeroCarousel() {
             src={image.src}
             alt={image.alt}
             fill
-            priority={index === 0} // Prioridad de carga solo a la primera imagen
+            priority={index === 0} 
             sizes="(max-w-768px) 100vw, 50vw"
             className="object-cover"
           />
-          {/* Un degradado sutil en los bordes para integrarlo mejor con el fondo */}
+          
           <div className="absolute inset-0 bg-linear-to-t from-black/20 via-transparent to-transparent" />
         </div>
       ))}

@@ -88,9 +88,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             </Badge>
           )}
         </div>
-        {/* <div className="absolute top-3 right-3">
-          <FavoriteButton productId={product.id} size="sm" />
-        </div> */}
+        
         <div className="absolute top-3 right-3 flex flex-col gap-2">
           <FavoriteButton productId={product.id} size="sm" />
           <button

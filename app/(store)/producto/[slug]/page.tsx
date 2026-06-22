@@ -54,7 +54,7 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-  const products = await getProducts();
+  const { products } = await getProducts({ perPage: 1000 });
   return products.map((p) => ({ slug: p.slug }));
 }
 

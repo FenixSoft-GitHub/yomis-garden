@@ -17,32 +17,6 @@ import {
   plantOptions,
 } from "@/app/constants/quoteStatus";
 
-// const projectTypes = [
-//   { value: "residencial", label: "🏡 Residencial" },
-//   { value: "comercial", label: "🏢 Comercial" },
-//   { value: "corporativo", label: "🌳 Corporativo" },
-//   { value: "evento", label: "🎉 Evento" },
-// ];
-
-// const budgetOptions = [
-//   "Menos de $500",
-//   "$500 - $1,000",
-//   "$1,000 - $3,000",
-//   "$3,000 - $5,000",
-//   "Más de $5,000",
-//   "Por definir",
-// ];
-
-// const plantOptions = [
-//   "Plantas tropicales",
-//   "Cactus y suculentas",
-//   "Árboles frutales",
-//   "Plantas de sombra",
-//   "Plantas con flores",
-//   "Follaje decorativo",
-//   "Sin preferencia",
-// ];
-
 export default function QuoteForm() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);

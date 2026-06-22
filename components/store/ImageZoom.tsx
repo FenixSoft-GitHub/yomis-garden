@@ -37,13 +37,12 @@ export default function ImageZoom({ images, productName }: ImageZoomProps) {
       >
         {currentImageUrl ? (
           <>
-            {/* ✨ Refactorizado a <Image /> con 'fill' por el contenedor aspect-square */}
             <Image
               src={currentImageUrl}
               alt={`Imagen principal de ${productName}`}
               fill
-              priority // Le da prioridad de carga (LCP) a la imagen principal del producto
-              sizes="(max-w-768px) 100vw, 50vw" // Optimiza la resolución según el dispositivo
+              priority 
+              sizes="(max-w-768px) 100vw, 50vw" 
               className={`object-cover transition-transform duration-200 ${
                 zoom ? "scale-150" : "scale-100"
               }`}
@@ -80,7 +79,6 @@ export default function ImageZoom({ images, productName }: ImageZoomProps) {
                   : "border-transparent opacity-70 hover:opacity-100 hover:border-green-300"
               }`}
             >
-              {/* ✨ Refactorizado a <Image /> con width y height fijos (w-20 = 80px) */}
               <Image
                 src={img}
                 alt={`Miniatura ${i + 1} de ${productName}`}

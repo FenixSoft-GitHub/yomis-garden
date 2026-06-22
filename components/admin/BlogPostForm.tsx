@@ -164,7 +164,7 @@ export default function BlogPostForm({ initialData }: BlogPostFormProps) {
             onChange={(e) =>
               setForm((prev) => ({ ...prev, is_published: e.target.checked }))
             }
-            className="w-4 h-4 accent-green-500"
+            className="size-4 accent-green-500"
           />
           <span className="text-gray-300 text-sm">Publicar inmediatamente</span>
         </label>
@@ -177,7 +177,7 @@ export default function BlogPostForm({ initialData }: BlogPostFormProps) {
           className="bg-green-600 hover:bg-green-700 text-white"
         >
           {loading ? (
-            <Loader2 className="w-4 h-4 animate-spin" />
+            <Loader2 className="size-4 animate-spin" />
           ) : isEditing ? (
             "Actualizar"
           ) : (

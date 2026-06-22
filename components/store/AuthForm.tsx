@@ -130,9 +130,9 @@ export default function AuthForm() {
               className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
             >
               {showPassword ? (
-                <EyeOff className="w-4 h-4" />
+                <EyeOff className="size-4" />
               ) : (
-                <Eye className="w-4 h-4" />
+                <Eye className="size-4" />
               )}
             </button>
           </div>
@@ -145,7 +145,7 @@ export default function AuthForm() {
         >
           {loading ? (
             <>
-              <Loader2 className="w-4 h-4 animate-spin mr-2" />
+              <Loader2 className="size-4 animate-spin mr-2" />
               {mode === "login" ? "Entrando..." : "Creando cuenta..."}
             </>
           ) : mode === "login" ? (

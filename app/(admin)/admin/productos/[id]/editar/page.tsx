@@ -57,6 +57,7 @@ export default async function EditarProductoPage({ params }: PageProps) {
           is_indoor: attr?.is_indoor ?? false,
           is_outdoor: attr?.is_outdoor ?? false,
           care_difficulty: attr?.care_difficulty ?? "",
+          mature_height_cm: attr?.mature_height_cm ?? undefined,
         }}
       />
     </div>

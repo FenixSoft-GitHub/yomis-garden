@@ -43,8 +43,6 @@ export default function CheckoutForm() {
     defaultValues: { payment_method: "zelle" },
   });
 
-  // const paymentMethod = watch("payment_method");
-
   const paymentMethod = useWatch({
     control,
     name: "payment_method",
@@ -243,7 +241,7 @@ export default function CheckoutForm() {
                     {...register("payment_method")}
                   />
                   <Icon
-                    className={`w-5 h-5 ${paymentMethod === value ? "text-green-600" : "text-gray-400"}`}
+                    className={`size-5 ${paymentMethod === value ? "text-green-600" : "text-gray-400"}`}
                   />
                   <span className="font-medium text-sm text-gray-900 dark:text-white">
                     {label}
@@ -319,7 +317,7 @@ export default function CheckoutForm() {
         <div className="lg:col-span-1">
           <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-600 shadow-sm p-6 sticky top-24">
             <h2 className="font-bold text-gray-900 dark:text-white text-lg mb-5 flex items-center gap-2">
-              <ShoppingCart className="w-5 h-5 text-green-600" />
+              <ShoppingCart className="size-5 text-green-600" />
               Tu pedido
             </h2>
 
@@ -344,7 +342,7 @@ export default function CheckoutForm() {
                           className="object-cover hover:scale-105 transition-transform duration-300"
                         />
                       ) : (
-                        <Leaf className="w-6 h-6 text-green-300" />
+                        <Leaf className="size-6 text-green-300" />
                       )}
                     </div>
                     <div className="flex-1 min-w-0">
@@ -392,7 +390,7 @@ export default function CheckoutForm() {
             >
               {loading ? (
                 <>
-                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <Loader2 className="size-4 animate-spin" />
                   Procesando...
                 </>
               ) : (

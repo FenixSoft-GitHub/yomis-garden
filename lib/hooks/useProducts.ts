@@ -10,12 +10,35 @@ export interface ProductFilters {
   dificultad?: string;
   perecedero?: boolean;
   busqueda?: string;
+  page?: number;
+  perPage?: number;
+}
+
+export interface PaginatedProducts {
+  products: Product[];
+  count: number;
+  page: number;
+  perPage: number;
+  totalPages: number;
 }
 
 export async function getProducts(
   filters: ProductFilters = {},
-): Promise<Product[]> {
+): Promise<PaginatedProducts> {
   const supabase = createClient();
+
+  const page = filters.page && filters.page > 0 ? filters.page : 1;
+  const perPage = filters.perPage && filters.perPage > 0 ? filters.perPage : 9;
+
+  // Si hay algún filtro botánico, necesitamos un INNER JOIN con plant_attributes
+  // para poder filtrar y paginar correctamente a nivel de base de datos.
+  const hasBotanicalFilter = Boolean(
+    filters.luz ||
+    filters.riego ||
+    filters.pet_friendly ||
+    filters.interior ||
+    filters.dificultad,
+  );
 
   let query = supabase
     .from("products")
@@ -23,22 +46,14 @@ export async function getProducts(
       `
       *,
       category:categories(*),
-      plant_attributes(*),
+      plant_attributes${hasBotanicalFilter ? "!inner" : ""}(*),
       product_variants(*)
     `,
+      { count: "exact" },
     )
-    .eq("is_active", true)
-    .order("is_featured", { ascending: false })
-    .order("created_at", { ascending: false });
+    .eq("is_active", true);
 
   if (filters.categoria) {
-    const { data: cat } = await supabase
-      .from("categories")
-      .select("id")
-      .or(
-        `slug.eq.${filters.categoria},parent_id.in.(select id from categories where slug='${filters.categoria}')`,
-      );
-
     const { data: cats } = await supabase
       .from("categories")
       .select("id")
@@ -64,38 +79,38 @@ export async function getProducts(
     query = query.eq("is_perishable", filters.perecedero);
   }
 
-  const { data, error } = await query;
+  // Filtros botánicos ahora resueltos en la base de datos (sobre la tabla embebida)
+  if (filters.luz) {
+    query = query.eq("plant_attributes.light_requirement", filters.luz);
+  }
+  if (filters.riego) {
+    query = query.eq("plant_attributes.water_frequency", filters.riego);
+  }
+  if (filters.pet_friendly) {
+    query = query.eq("plant_attributes.is_pet_friendly", true);
+  }
+  if (filters.interior) {
+    query = query.eq("plant_attributes.is_indoor", true);
+  }
+  if (filters.dificultad) {
+    query = query.eq("plant_attributes.care_difficulty", filters.dificultad);
+  }
+
+  const from = (page - 1) * perPage;
+  const to = from + perPage - 1;
+
+  const { data, error, count } = await query
+    .order("is_featured", { ascending: false })
+    .order("created_at", { ascending: false })
+    .range(from, to);
 
   if (error) throw error;
 
-  let products = (data as Product[]) ?? [];
+  const products = (data as Product[]) ?? [];
+  const totalCount = count ?? 0;
+  const totalPages = Math.max(1, Math.ceil(totalCount / perPage));
 
-  // Filtros botánicos (post-query sobre plant_attributes)
-  if (filters.luz) {
-    products = products.filter(
-      (p) => p.plant_attributes?.light_requirement === filters.luz,
-    );
-  }
-  if (filters.riego) {
-    products = products.filter(
-      (p) => p.plant_attributes?.water_frequency === filters.riego,
-    );
-  }
-  if (filters.pet_friendly) {
-    products = products.filter(
-      (p) => p.plant_attributes?.is_pet_friendly === true,
-    );
-  }
-  if (filters.interior) {
-    products = products.filter((p) => p.plant_attributes?.is_indoor === true);
-  }
-  if (filters.dificultad) {
-    products = products.filter(
-      (p) => p.plant_attributes?.care_difficulty === filters.dificultad,
-    );
-  }
-
-  return products;
+  return { products, count: totalCount, page, perPage, totalPages };
 }
 
 export async function getProductBySlug(slug: string): Promise<Product | null> {

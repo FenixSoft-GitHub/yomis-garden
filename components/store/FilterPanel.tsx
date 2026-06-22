@@ -16,6 +16,7 @@ export default function FilterPanel() {
     } else {
       next.set(key, value);
     }
+    next.delete("page");
     router.push(`/catalogo?${next.toString()}`);
   };
 
@@ -26,6 +27,7 @@ export default function FilterPanel() {
     } else {
       next.set(key, "1");
     }
+    next.delete("page");
     router.push(`/catalogo?${next.toString()}`);
   };
 
@@ -50,7 +52,7 @@ export default function FilterPanel() {
             onClick={clearAll}
             className="text-xs text-gray-500 gap-1"
           >
-            <X className="w-3 h-3" /> Limpiar
+            <X className="size-3" /> Limpiar
           </Button>
         )}
       </div>

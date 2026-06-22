@@ -23,7 +23,7 @@ interface Product {
   is_featured: boolean;
   is_perishable: boolean;
   category?: { name: string };
-  images: string[];
+  images: string[]; 
 }
 
 export default function ProductsTable({
@@ -192,13 +192,13 @@ export default function ProductsTable({
                           disabled={saving}
                           className="text-green-400 hover:text-green-300"
                         >
-                          <CheckCircle className="w-4 h-4" />
+                          <CheckCircle className="size-4" />
                         </button>
                         <button
                           onClick={() => setEditingStock(null)}
                           className="text-gray-500 hover:text-gray-300"
                         >
-                          <XCircle className="w-4 h-4" />
+                          <XCircle className="size-4" />
                         </button>
                       </div>
                     ) : (
@@ -218,12 +218,12 @@ export default function ProductsTable({
                           {product.stock_quantity} uds
                         </span>
                         {isOut && (
-                          <AlertTriangle className="w-3 h-3 text-red-400" />
+                          <AlertTriangle className="size-3 text-red-400" />
                         )}
                         {isLow && !isOut && (
-                          <AlertTriangle className="w-3 h-3 text-orange-400" />
+                          <AlertTriangle className="size-3 text-orange-400" />
                         )}
-                        <Pencil className="w-3 h-3 text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        <Pencil className="size-3 text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity" />
                       </button>
                     )}
                   </td>
@@ -263,7 +263,7 @@ export default function ProductsTable({
                       href={`/admin/productos/${product.id}/editar`}
                       className="text-gray-400 hover:text-white transition-colors"
                     >
-                      <Pencil className="w-4 h-4" />
+                      <Pencil className="size-4" />
                     </Link>
                   </td>
                 </tr>

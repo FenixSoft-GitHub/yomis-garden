@@ -18,6 +18,7 @@ export const productSchema = z.object({
   is_indoor: z.boolean().default(false),
   is_outdoor: z.boolean().default(false),
   care_difficulty: z.string().optional(),
+  mature_height_cm: z.number().min(0).optional().nullable(),
 });
 
 export type ProductFormData = z.infer<typeof productSchema>;

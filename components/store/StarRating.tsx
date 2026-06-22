@@ -19,9 +19,9 @@ export default function StarRating({
   onChange,
 }: StarRatingProps) {
   const sizeClass = {
-    sm: "w-3 h-3",
-    md: "w-4 h-4",
-    lg: "w-6 h-6",
+    sm: "size-3",
+    md: "size-4",
+    lg: "size-6",
   }[size];
 
   return (

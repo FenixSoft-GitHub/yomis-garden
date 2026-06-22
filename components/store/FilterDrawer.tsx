@@ -37,6 +37,7 @@ export default function FilterDrawer() {
     } else {
       next.set(key, value);
     }
+    next.delete("page");
     router.push(`/catalogo?${next.toString()}`);
   };
 
@@ -47,13 +48,14 @@ export default function FilterDrawer() {
     } else {
       next.set(key, "1");
     }
+    next.delete("page");
     router.push(`/catalogo?${next.toString()}`);
   };
 
   const clearAll = () => {
     const next = new URLSearchParams(params.toString());
-    ["luz", "riego", "dificultad", "pet_friendly", "interior"].forEach((k) =>
-      next.delete(k),
+    ["luz", "riego", "dificultad", "pet_friendly", "interior", "page"].forEach(
+      (k) => next.delete(k),
     );
     router.push(`/catalogo?${next.toString()}`);
   };

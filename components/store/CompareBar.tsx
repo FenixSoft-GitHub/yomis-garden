@@ -4,6 +4,7 @@ import { useCompareStore } from "@/lib/stores/compare.store";
 import { Scale, X, ArrowRight, Leaf } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function CompareBar() {
   const { products, removeProduct, clearAll } = useCompareStore();
@@ -26,15 +27,19 @@ export default function CompareBar() {
                 key={product.id}
                 className="flex items-center gap-2 bg-gray-50 dark:bg-gray-800 rounded-xl pl-2 pr-1 py-1 shrink-0"
               >
-                <div className="w-8 h-8 bg-green-50 dark:bg-green-950/30 rounded-lg overflow-hidden flex items-center justify-center shrink-0">
+                <div className="relative size-12 bg-green-50 dark:bg-green-950/30 rounded-lg overflow-hidden shrink-0">
                   {product.images?.[0] ? (
-                    <img
+                    <Image
                       src={product.images[0]}
-                      alt=""
-                      className="w-full h-full object-cover"
+                      alt={product.name || "Miniatura del producto"} 
+                      fill
+                      sizes="32px" 
+                      className="object-cover"
                     />
                   ) : (
-                    <Leaf className="w-4 h-4 text-green-300" />
+                    <div className="w-full h-full flex items-center justify-center">
+                      <Leaf className="size-4 text-green-300" />
+                    </div>
                   )}
                 </div>
                 <span className="text-xs text-gray-700 dark:text-gray-300 max-w-20 truncate hidden sm:inline">

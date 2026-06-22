@@ -41,10 +41,10 @@ export default function CartDrawer() {
         <SheetHeader className="px-6 py-4 border-b border-gray-100 dark:border-gray-800">
           <div className="flex items-center justify-between">
             <SheetTitle className="flex items-center gap-2 text-gray-900 dark:text-white">
-              <ShoppingCart className="w-5 h-5 text-green-600" />
+              <ShoppingCart className="size-5 text-green-600" />
               Tu carrito
               {totalItems() > 0 && (
-                <span className="bg-green-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
+                <span className="bg-green-600 text-white text-xs rounded-full size-5 flex items-center justify-center font-bold">
                   {totalItems()}
                 </span>
               )}
@@ -56,8 +56,8 @@ export default function CartDrawer() {
         <div className="flex-1 overflow-y-auto px-6 py-4">
           {items.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full gap-4 text-center">
-              <div className="w-20 h-20 bg-green-50 dark:bg-green-950/30 rounded-full flex items-center justify-center">
-                <ShoppingCart className="w-10 h-10 text-green-300" />
+              <div className="size-20 bg-green-50 dark:bg-green-950/30 rounded-full flex items-center justify-center">
+                <ShoppingCart className="size-10 text-green-300" />
               </div>
               <div>
                 <p className="font-semibold text-gray-900 dark:text-white mb-1">
@@ -73,7 +73,7 @@ export default function CartDrawer() {
                 asChild
               >
                 <Link href="/catalogo">
-                  <Leaf className="w-4 h-4" />
+                  <Leaf className="size-4" />
                   Ver catálogo
                 </Link>
               </Button>
@@ -140,7 +140,7 @@ export default function CartDrawer() {
                           }}
                           className="text-gray-300 dark:text-gray-600 hover:text-red-500 transition-colors p-1 shrink-0"
                         >
-                          <X className="w-4 h-4" />
+                          <X className="size-4" />
                         </button>
                       </div>
 
@@ -155,9 +155,9 @@ export default function CartDrawer() {
                                 item.variant?.id,
                               )
                             }
-                            className="w-7 h-7 rounded-lg border border-gray-200 dark:border-gray-700 flex items-center justify-center hover:border-green-400 transition-colors"
+                            className="size-7 rounded-lg border border-gray-200 dark:border-gray-700 flex items-center justify-center hover:border-green-400 transition-colors"
                           >
-                            <Minus className="w-3 h-3" />
+                            <Minus className="size-3" />
                           </button>
                           <span className="w-6 text-center text-sm font-semibold text-gray-900 dark:text-white">
                             {item.quantity}
@@ -170,9 +170,9 @@ export default function CartDrawer() {
                                 item.variant?.id,
                               )
                             }
-                            className="w-7 h-7 rounded-lg border border-gray-200 dark:border-gray-700 flex items-center justify-center hover:border-green-400 transition-colors"
+                            className="size-7 rounded-lg border border-gray-200 dark:border-gray-700 flex items-center justify-center hover:border-green-400 transition-colors"
                           >
-                            <Plus className="w-3 h-3" />
+                            <Plus className="size-3" />
                           </button>
                         </div>
                         <span className="text-sm font-bold text-gray-900 dark:text-white">
@@ -209,7 +209,7 @@ export default function CartDrawer() {
             >
               <Link href="/checkout">
                 Proceder al pago
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="size-4" />
               </Link>
             </Button>
             <Button
